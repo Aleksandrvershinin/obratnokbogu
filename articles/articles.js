@@ -1,5 +1,65 @@
 function articlesJs() {
+    // записываем параметры url  в переменную
+    let srcArticle = getGet();
 
+    // получаем название статьи
+    let nameArticle = getName(srcArticle);
+
+
+    // запускаем skroll
+    srollTo(getInfoLocalStorage(nameArticle));
+
+    // функция получения названия статьи
+    function getName(url) {
+        let urlReplase = url.replace(/\//gi, '');
+        let getName;
+        if (urlReplase !== 'articles') {
+            getName = url.replace(/^\/\w+\//gi, '');
+            getName = getName.replace(/\//gi, '');
+        } else {
+            getName = 'articles';
+        }
+
+        return getName;
+    }
+
+    // функция получения из localStorage
+    function getInfoLocalStorage(nameArticle) {
+        let scrolled = localStorage.getItem(nameArticle);
+        if (nameArticle === 'articles') {
+            scrolled = 0;
+        } else {
+            if (scrolled === null) {
+                scrolled = 0
+            }
+        }
+
+        return scrolled;
+    }
+
+    // функция скролла
+    function srollTo(scrolled) {
+        window.scrollTo({ top: scrolled });
+    }
+    // функция запуска скрола
+    function startScroll() {
+        document.onscroll = () => {
+            trackScroll();
+        }
+    }
+    startScroll();
+
+    // функция получения scroll
+    function trackScroll() {
+        let scrolled = window.pageYOffset;
+        setInfoLocalStorage(scrolled);
+
+    }
+
+    // функция сохранения scrolled в localStorage
+    function setInfoLocalStorage(scrolled) {
+        localStorage.setItem(nameArticle, scrolled);
+    }
 
     //  функция получения элементов статей и пагинация по ним
     function getElements() {
@@ -24,7 +84,7 @@ function articlesJs() {
         // функция обработки кликов
         function click(element) {
             // получаем  data из data атрибута
-            let srcArticle = element.dataset.articleSrc;
+            srcArticle = element.dataset.articleSrc;
             // меняем адресную строку
             changeUrl(srcArticle, `${srcArticle}`, "pushState");
             // отправляем ajax запрос
@@ -38,17 +98,14 @@ function articlesJs() {
     // получаем элемент в который будем загружать страничку
     let articlesMain = document.querySelector('.articles_main');
 
-    // записываем параметры url  в переменную
-    let srcArticle = getGet();
 
     // записываем текущее состояние страницы
     changeUrl(srcArticle, null, 'replace')
 
     // фукция отправки запроса
-    async function getPage(srcArticle, scroll) {
-        // прокручиваем страничку наверх
-        // if (scroll) { window.scrollTo(0, 0); }
-
+    async function getPage(srcArticle) {
+        // получаем название статьи
+        nameArticle = getName(srcArticle);
         // отправляем запрос
         let response = await fetch(`/articles/body_articles.php?path=${srcArticle}`, {
             method: 'GET',
@@ -60,6 +117,10 @@ function articlesJs() {
             articlesMain.innerHTML = result;
             // получаем элементы статей
             getElements();
+
+            // запускаем skroll
+            srollTo(getInfoLocalStorage(nameArticle));
+            startScroll();
         } else {
 
         }
@@ -70,8 +131,11 @@ function articlesJs() {
         // проверяем есть ли запись состояния
         if (window.history.state.path !== undefined) {
             // отправляем запрос согласно сохраненому состоянию
-            getPage(window.history.state.path, false);
+            getPage(window.history.state.path);
             // changeUrl(window.history.state.id, null, "replace");
+
+            // удаляем обработчик на scroll
+            document.onscroll = null;
         }
     });
 

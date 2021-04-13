@@ -21,6 +21,7 @@
 
 <body id="main">
    <script src="/js/header.js"></script>
+
    <div class="main-and-footer">
       <main class="main">
          <section class="section first-section">

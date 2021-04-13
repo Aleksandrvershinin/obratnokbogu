@@ -129,4 +129,30 @@
         });
     }
 
+    // функция добавления кнопки goToTop
+    let btnTop = document.createElement('div');
+    document.body.prepend(btnTop);
+    btnTop.classList.add('btn-top');
+
+    function trackScroll() {
+        let scrolled = window.pageYOffset;
+
+        if (scrolled > 100) {
+            goTopBtn.classList.add('btn-top-show');
+        }
+        if (scrolled < 100) {
+            goTopBtn.classList.remove('btn-top-show');
+        }
+    }
+    // функция скролла наверх
+    function goToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    let goTopBtn = document.querySelector('.btn-top');
+    // обработка события 'scroll'
+    window.addEventListener('scroll', trackScroll,
+        { passive: true });
+    // обработка события 'click' для скролла
+    goTopBtn.addEventListener('click', goToTop);
 })();
