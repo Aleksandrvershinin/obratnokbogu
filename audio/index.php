@@ -5,15 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script defer src="/audio/audio.js"></script> -->
-    <?php include $_SERVER['DOCUMENT_ROOT'] . "/audio/audio.php"; ?>
+    <?php
+    include $_SERVER['DOCUMENT_ROOT'] . "/audio/audio.php";
+    ?>
     <script class="script-share" src="/js/share_social_media.js" async></script>
     <link rel="stylesheet" href="/style/share_social_media.css">
 
     <script src="/js/simplebar.min.js"></script>
+    <link rel="stylesheet" href="/style/simplebar.css">
+
     <link rel="stylesheet" href="/style/normalize.css">
 
+    <!-- <script type="module" src="/audio/audio.js"></script> -->
     <script src="/audio/playlists.js"></script>
-    <link rel="stylesheet" href="/style/simplebar.css">
 
 
 
@@ -85,7 +89,7 @@
                     </div>
                     <div class="audio-hud-element audio-hud-duration" id="audio-hud-duration">00:00</div>
 
-                    <div class="audio-hud-element audio-hud-share" style="background-color: #fff; border-radius: 50%;" id="my-share">
+                    <div class="audio-hud-element audio-hud-share" id="my-share">
                     </div>
                     <div class="audio-hud-element audio-hud-loop"></div>
                     <div class=" audio-hud-element audio-hud-mix"></div>
@@ -117,9 +121,7 @@
             </div>
         </div>
     </div>
-    <div class="pla">
 
-    </div>
 </body>
 <!-- скрипт поделиться в соц сетях -->
 <script>
@@ -143,12 +145,3 @@
 </script>
 
 </html>
-<ul>
-    <?
-foreach($user as $key => $value ) { ?>
-    <li>
-        <?= $key . '-' . $value; ?>
-    </li>
-    <?}
-?>
-</ul>

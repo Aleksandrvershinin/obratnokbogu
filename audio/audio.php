@@ -1,10 +1,3 @@
-<?php
-// получаем текущий url
-$url = $_SERVER['REQUEST_URI'];
-// $url = htmlspecialchars($url);
-$url = preg_replace('/\//', '', $url);
-$url = preg_replace('/audio/', '', $url);
-?>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
 
@@ -198,50 +191,10 @@ $url = preg_replace('/audio/', '', $url);
                 return
             };
         });
+        <?php
+        include $_SERVER['DOCUMENT_ROOT'] . "/audio/process_url.php";
+        ?>
 
-
-        // проверяем get
-        <?php if (isset($_GET["idPlaylist"]) && $_GET["idPlaylist"] !== '') { ?>
-            // сохраняем в пременную плейлист
-            let playList = playLists[<?php echo htmlspecialchars($_GET["idPlaylist"]) ?> - 1];
-            // проверяем существует ли объект
-            if (playList !== undefined) {
-                // заполняем список треков
-                filingPlaylist(playList.tracks);
-                // устанавливаем первый трек в текущем плейлисте
-                currentIdTrack = currentPlaylist[0].id;
-                // устанавливаем текущий плейлист
-                currentIdPlaylist = <?php echo htmlspecialchars($_GET["idPlaylist"]) ?>;
-                // загружаем плейлист в плеер
-                setPlaylist(currentPlaylist);
-                // устанавливаем трек в плеер
-                setTrack(0);
-                // запускаем плеер
-                audioAct();
-            } else {
-                // загружаем плеер согласно localStorage
-                loadPage();
-            }
-            //  ищем трек по url
-        <?php } else { ?>
-            let result = lookforTrack('nameTranslit', '<?= $url ?>');
-            if (result['playlist'] !== undefined) {
-                // заполняем список треков
-                filingPlaylist(result['playlist']);
-                // устанавливаем трек
-                currentIdTrack = result['idTrack'];
-                // загружаем плейлист в плеер
-                setPlaylist(currentPlaylist);
-                // устанавливаем трек в плеер
-                setTrack(lookforIndexTrack());
-                // подсвечиваем трек
-                markerCurrentTrack(searchTrackInPlaylist(currentPlaylist, currentIdTrack));
-                setTimeout(scroll, 1);
-            } else {
-                // загружаем плеер согласно localStorage
-                loadPage();
-            }
-        <?php } ?>
 
 
 
@@ -556,9 +509,9 @@ $url = preg_replace('/audio/', '', $url);
                 e.sliceName = e.name;
                 let uri = `https://obratnokbogu.ru/audio/${e.nameTranslit}`;
                 if (e.sliceName.length > 80) {
-                    index = e.sliceName.indexOf(' ', 70);
-                    count = 80 - index;
-                    e.sliceName = e.sliceName.substr(0, );
+                    // index = e.sliceName.indexOf(' ', 70);
+                    // count = 80 - index;
+                    // e.sliceName = e.sliceName.substr(0, );
                     // e.sliceName = e.sliceName + ' ';
                 };
                 li.innerHTML = `
@@ -572,7 +525,7 @@ $url = preg_replace('/audio/', '', $url);
             <div class="audio-playlist-item-equalizer-bar"></div>
             </div>
             </button>
-            <audio preload="metadata" class="audio1" src="${e.src}"></audio>
+            <audio preload="none" class="audio1" src="${e.src}"></audio>
             <div class="audio-playlist-item-info-playlist">
               <p title="${e.name}" class="audio-playlist-item-name-track">${e.sliceName}
 
@@ -586,7 +539,7 @@ $url = preg_replace('/audio/', '', $url);
                </button>
                <div class="ya-share2" data-url="${uri}" data-title="${e.name}" data-image="https://obratnokbogu.ru/media/sh.jpg" data-more-button-type="short" data-popup-direction="auto" data-popup-position="outer" data-direction="horizontal" data-limit="0" data-copy="last" data-shape="round" data-size="s" data-services="vkontakte,facebook,odnoklassniki,telegram,whatsapp,viber"></div>
             </div>`;
-                if (e.name.length > 80) {
+                if (e.name.length > 85) {
                     addPointsNameTracks(i)
                 };
             });
@@ -610,7 +563,7 @@ $url = preg_replace('/audio/', '', $url);
             item = document.querySelectorAll('.audio-playlist-item-name-track-points');
             item[i].style.display = 'inline';
         };
-        // let t = decodeURI('')
+
         // функция генерации случайных чисел
         function getRandomArray(n = 7, m = 0) {
             let randomArray = [];

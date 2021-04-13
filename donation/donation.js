@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    // получаем кнопки с выбором суммы
    let donationBtnSum = document.querySelectorAll('.donation__form__btn__sum');
+   let donationBtnSumBody = document.querySelectorAll('.donation__form__btn__sum__body');
 
    // получаем item с суммой
    let donationFormItemSum = document.querySelector('.donation__form__item__sum');
@@ -68,70 +69,63 @@ document.addEventListener('DOMContentLoaded', () => {
    });
 
    function removeClassIsActive() {
-      donationBtnSum.forEach(el => {
+      donationBtnSumBody.forEach(el => {
          el.classList.remove('is-active');
       });
+      donationFormItemSum.classList.remove('is-active');
    }
+   // функция установки активной кнопки
+   function getBtnActive(index) {
+      // отбираем у всех кнопок актив
+      removeClassIsActive();
 
-   // функция определения суммы и посветка кнопки
-   function getBtnSumIsActive() {
-      if (Number(donationFormInputSum.value) === 108) {
-         // убираем класс is-active у каждой кнопки
-         removeClassIsActive();
-         // добавляем активной кнопке класс
-         document.querySelector('[data-sum="108"]').classList.add('is-active');
-      } else if (Number(donationFormInputSum.value) === 1008) {
-         // убираем класс is-active у каждой кнопки
-         removeClassIsActive();
-         // добавляем активной кнопке класс
-         document.querySelector('[data-sum="1008"]').classList.add('is-active');
+      if (index === 2) {
+         donationFormItemSum.classList.add('is-active');
+
       } else {
-         // убираем класс is-active у каждой кнопки
-         removeClassIsActive();
-         // добавляем активной кнопке класс
-         document.querySelector('[data-sum="0"]').classList.add('is-active');
+         donationBtnSumBody[index].classList.add('is-active');
       }
    }
-   // добавляем активной кнопке класс
-   getBtnSumIsActive();
 
    // перебираем кнопки
-   donationBtnSum.forEach((element, index) => {
+   donationBtnSumBody.forEach((element, index) => {
 
       // отслеживаем клик
       element.addEventListener('click', () => {
-
          // устанвливаем значение суммы инпута соглассно значению выбранной суммы
-         donationFormInputSum.value = element.dataset.sum;
-         // добавляем активной кнопке класс
-         getBtnSumIsActive();
+         donationFormInputSum.value = element.dataset.sumBody;
+
+         getBtnActive(index);
          // проверяем если значение равно 0 показываем инпут для самостоятельного ввода суммы
          if (Number(donationFormInputSum.value) === 0) {
 
             // показваем инпут для ввода суммы
             donationFormItemSum.classList.remove('hide');
-
+            document.querySelector('[data-sum-body="0"]').classList.add('hide');
             // устанавливаем в значение суммы пустую строку
             donationFormInputSum.value = "";
 
-            // проверяем если значение пустое запрещаем отправку
          }
+         // проверяем если значение пустое запрещаем отправку
          checkValueSum();
       });
    });
 
-   // отслеживаем сгобытие input
+   // отслеживаем событие input
    donationFormInputSum.addEventListener('input', () => {
-      // добавляем активной кнопке класс
-      getBtnSumIsActive();
+
       //проверяем если значение пустое запрещаем отправку и заменяем все не цифры пустой строкой
       checkValueSum();
    });
 
+   // отслеживаем сгобытие focus
+   donationFormInputSum.addEventListener('focus', () => {
+      // отбираем активной кнопке класс
+      removeClassIsActive();
+      getBtnActive(2);
+   });
    // отслеживаем сгобытие blur
    donationFormInputSum.addEventListener('blur', () => {
-      // добавляем активной кнопке класс
-      getBtnSumIsActive();
       //проверяем если значение пустое запрещаем отправку и заменяем все не цифры пустой строкой
       checkValueSum();
    });

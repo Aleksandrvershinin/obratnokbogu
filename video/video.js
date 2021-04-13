@@ -18,6 +18,20 @@
     function hideplaylistsElement() {
         playlistsElement.forEach(e => e.style.display = "none");
     }
+    // отбираем класс акитвности у плейлистов
+    function removeClassPlalists() {
+        playlistsList.forEach(e => e.classList.remove('is-active'));
+    }
+
+    // добавляем активному плейлисту класс
+    function addClassPlaylist(index) {
+        // отбираем класс акитвности у плейлистов
+        removeClassPlalists();
+
+        if (index >= 0) {
+            playlistsList[index].classList.add('is-active');
+        }
+    }
 
     // скрываем элементы плейлистов
     hideplaylistsElement();
@@ -196,6 +210,9 @@
 
                 // сбрасываем индекс текущего плейлиста
                 currentPlaylistIndex = -1;
+
+                // добавляем активному плейлисту класс
+                addClassPlaylist(currentPlaylistIndex);
             } else {
                 // очищаем плейлист
                 cleanPlaylist();
@@ -205,6 +222,8 @@
 
                 // записываем в пременную индекс текущего плейлиста
                 currentPlaylistIndex = index;
+                // добавляем активному плейлисту класс
+                addClassPlaylist(currentPlaylistIndex);
             }
         });
     });
@@ -225,6 +244,9 @@
 
             // скрываем элементы плейлистов
             hideplaylistsElement();
+
+            // добавляем активному плейлисту класс
+            addClassPlaylist(currentPlaylistIndex);
         }
     });
 

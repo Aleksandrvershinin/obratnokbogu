@@ -8,7 +8,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/magazin/include/goods.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="/js/main.js"></script>
-    <script defer src="/shopcart/sopping-cart.js"></script>
+    <script defer type="module" src="/shopcart/sopping-cart.js"></script>
     <!-- <link rel="stylesheet" href="style/animate.css"> -->
     <link rel="stylesheet" href="../style/normalize.css">
     <link rel="stylesheet" href="../style/style.css">

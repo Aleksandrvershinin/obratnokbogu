@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     // получаем массив с товарами
     getGoods();
     // функция GET запроса массива с товарами
@@ -123,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 hideDescription(0)
             }
         }
-
         //функция удаления
         function deleteBook(key) {
             let index = goodsInShoppingCart.findIndex(e => e.key === key);

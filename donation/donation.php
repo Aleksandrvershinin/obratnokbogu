@@ -5,7 +5,7 @@
         <div class="shopping-cart__form__close1 form__close2"></div>
         <div class="donation__form__close form__close"></div>
         <div class="donation__description">
-            <p>Дорогие гости сайта, Харе Кришна!<br>Примите наши смиренные поклоны!</p>
+            <p>Дорогие гости сайта, Харе Кришна!<br>Примите наши поклоны!</p>
             <p>
                 В данный момент в сайт вкладывается много труда, финансов и времени. Сейчас мы работаем над базой поиска, в которой хотим разместить книги, лекции и письма Шрилы Прабхупады. Также хотим реализовать режим чтения книг и другие полезные функций.
                 Будем рады за вашу поддержку сайта - «Обратно к Богу».
@@ -37,13 +37,19 @@
                 </div>
             </div>
             <div class="donation__form__item">
-                <input data-sum="108" class="donation__form__btn__sum" type="button" value="108 рублей">
-                <input data-sum="1008" class="donation__form__btn__sum" type="button" value="1008 рублей">
-                <input data-sum="0" class="donation__form__btn__sum" type="button" value="ввести сумму">
-            </div>
-            <div class="donation__form__item donation__form__item__sum hide">
-                <label class="donation__form__label__sum" for="sum">В ведите сумму в рублях</label>
-                <input class="donation__form__input__sum " id="sum" type="text" name="sum" value="108" data-type="number">
+                <div class="donation__form__btn__sum__body" data-sum-body="108">
+                    <input data-sum="108" class="donation__form__btn__sum" type="button" value="108 рублей">
+                </div>
+                <div class="donation__form__btn__sum__body is-active" data-sum-body="1008">
+                    <input data-sum="1008" class="donation__form__btn__sum" type="button" value="1008 рублей">
+                </div>
+                <div class="donation__form__btn__sum__body" data-sum-body="0">
+                    <input data-sum="0" class="donation__form__btn__sum" type="button" value="ввести сумму">
+                </div>
+                <div class="donation__form__item donation__form__item__sum hide">
+                    <label class="donation__form__label__sum hide" for="sum">В ведите сумму в рублях</label>
+                    <input class="donation__form__input__sum donation__form__btn__sum " id="sum" type="text" name="sum" value="1008" data-type="number">
+                </div>
             </div>
             <div class="donation__form__item donation__form__item__message">
                 <textarea placeholder="Комментарий.." class="donation__form__input__message" type="text" id="comment" name="comment" value=""></textarea>
