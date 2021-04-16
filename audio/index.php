@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script defer src="/audio/audio.js"></script> -->
     <?php
-    include $_SERVER['DOCUMENT_ROOT'] . "/audio/audio.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/audio/process_url.php";
     ?>
+
     <script class="script-share" src="/js/share_social_media.js" async></script>
     <link rel="stylesheet" href="/style/share_social_media.css">
 
@@ -16,12 +17,13 @@
 
     <link rel="stylesheet" href="/style/normalize.css">
 
-    <!-- <script type="module" src="/audio/audio.js"></script> -->
-    <script src="/audio/playlists.js"></script>
+    <script src="/audio/audio_js/playlists.js"></script>
+    <script type="module" src="/audio/audio_js/audio_main.js"></script>
+    <!-- <script async src="/audio/marquee.js"></script> -->
 
 
 
-    <!-- <link rel="stylesheet" href="style/animate.css"> -->
+
     <link rel="stylesheet" href="/style/style.css">
     <title>аудио лекции</title>
 </head>
@@ -52,7 +54,7 @@
                         </form>
                     </div>
                     <div class="audio-playlist__body">
-                        <div data-simplebar-auto-hide="false" class="audio-playlist-container">
+                        <div data-simplebar-auto-hide="false" data-simplebar data-simplebar-scrollbar-max-size="50" class="audio-playlist-container">
                             <ul class="audio-playlist-list">
 
                             </ul>
@@ -82,9 +84,11 @@
                     </button>
                     <div class="audio-hud-element audio-hud-curr-time" id="audio-hud-curr-time">00:00</div>
                     <div class="audio-player-info">
-                        <!-- <div class="audio-hud-element audio-player-name-track"> </div> -->
-                        <marquee behavior="alternate" scrollamount="2" class="audio-hud-element audio-player-name-track">
-                        </marquee>
+                        <div class="audio-hud-element audio-player-name-track">
+                            <p class="audio-player-name-track-marquee audio-player-name-track-marquee1"></p>
+                            <p class="hide audio-player-name-track-marquee audio-player-name-track-marquee2"></p>
+                        </div>
+
                         <input disabled type="range" step="0.000000000000000001" value="0" max="100" class="audio-hud-element audio-hud-progress-bar" id="audio-hud-progress-bar">
                     </div>
                     <div class="audio-hud-element audio-hud-duration" id="audio-hud-duration">00:00</div>
@@ -95,27 +99,6 @@
                     <div class=" audio-hud-element audio-hud-mix"></div>
                     <div class="audio-hud-element audio-hud-mute audio-hud-mute-false" id="audio-hud-mute"></div>
                     <input style=" -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; user-select: none;" type="range" value="50" max="100" title="Громкость" class="audio-hud-element audio-hud-volume" id="audio-hud-volume">
-                    <!-- <select title="Скорость" class="audio-hud-element audio-hud-speed" id="audio-hud-speed">
-
-                            <option value="25">x0.25</option>
-
-                            <option value="50">x0.50</option>
-
-                            <option value="75">x0.75</option>
-
-                            <option value="100" selected>x1.00</option>
-
-                            <option value="125">x1.25</option>
-
-                            <option value="150">x1.50</option>
-
-                            <option value="175">x1.75</option>
-
-                            <option value="200">x2.00</option>
-
-                        </select> -->
-                    <!-- <a class="audio-hud-element audio-hud-download" title="Скачать" href="audio.mp4" download></a> -->
-
                 </div>
 
             </div>

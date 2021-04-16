@@ -12,7 +12,7 @@
     <meta property="og:description" content="">
     <meta property="og:image" content="https://obratnokbogu.ru/media/img/link_home.jpg"> -->
     <script defer src="/photo/photo.js"></script>
-    <script defer src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
 
     <!-- <link rel="stylesheet" href="style/animate.css"> -->
     <link rel="stylesheet" href="/style/normalize.css">
@@ -59,6 +59,10 @@
         <? include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.php';?>
     </div>
 
+    <!-- скрипт добвления кнопки наверх -->
+    <script>
+        addBtnGoToTop();
+    </script>
 </body>
 
 </html>

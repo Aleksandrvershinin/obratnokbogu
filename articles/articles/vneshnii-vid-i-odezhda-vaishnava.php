@@ -1,6 +1,6 @@
 <?php
 // подключаем файл back
-include $_SERVER['DOCUMENT_ROOT'] . "/articles/articles/back.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/articles/articles/for_all_articles.php";
 ?>
 <div class="container article__container">
     <div class="line-height28 font-size19">

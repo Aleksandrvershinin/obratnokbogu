@@ -19,7 +19,7 @@ include __DIR__ . "/count_users.inc.php";
 
     <script defer src="radio.js"></script>
     <script src="/js/simplebar.min.js"></script>
-    <script src="/audio/playlists.js"></script>
+    <script src="/audio/audio_js/playlists.js"></script>
     <link rel="stylesheet" href="../style/simplebar.css">
 
     <!-- <link rel="stylesheet" href="style/animate.css"> -->

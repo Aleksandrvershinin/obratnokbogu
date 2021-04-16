@@ -11,11 +11,11 @@
    <!-- <meta property="og:description" content=""> -->
    <meta property="og:image" content="https://obratnokbogu.ru/media/img/link_home.jpg">
 
-   <script defer src="js/main.js"></script>
-
    <!-- <link rel="stylesheet" href="style/animate.css"> -->
    <link rel="stylesheet" href="/style/normalize.css">
    <link rel="stylesheet" href="/style/style.css">
+   <script src="/js/main.js"></script>
+
    <title>Главная - Обратно к Богу</title>
 </head>
 
@@ -93,7 +93,7 @@
                            <p>лекций для</p>
                            <p>практикующих</p>
                         </div>
-                        <a href="/audio/?idPlaylist=3"></a>
+                        <a href="audio/bg_vvedenie_chast_1_avtoritetnost_bhagavad_gity_i_verhovnoy_lichnosti_boga_19_02_1966_g_nyu_york_shrila_prabhupada"></a>
                      </button>
 
 
@@ -238,6 +238,12 @@
       </main>
       <? include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.php';?>
    </div>
+
+   <!-- скрипт добвления кнопки наверх -->
+   <script>
+      addBtnGoToTop();
+   </script>
+
 </body>
 
 </html>

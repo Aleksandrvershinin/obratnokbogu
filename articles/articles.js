@@ -94,7 +94,8 @@ function articlesJs() {
     }
     // получаем элементы сразу по загрузке страницы
     getElements();
-
+    // функция добавления кнопки goToTop в статьях
+    addGoToTop();
     // получаем элемент в который будем загружать страничку
     let articlesMain = document.querySelector('.articles_main');
 
@@ -117,7 +118,8 @@ function articlesJs() {
             articlesMain.innerHTML = result;
             // получаем элементы статей
             getElements();
-
+            // функция добавления кнопки goToTop в статьях
+            addGoToTop();
             // запускаем skroll
             srollTo(getInfoLocalStorage(nameArticle));
             startScroll();
@@ -148,7 +150,37 @@ function articlesJs() {
             history.pushState({ 'path': srcArticle }, null, url);
         }
     }
-    return (nameFanction) => {
-        nameFanction();
-    };
+
+    // функция добавления кнопки goToTop в статьях
+    function addGoToTop() {
+        let goTopBtn = document.getElementById('btn-top');
+        // обработка события 'scroll'
+        window.addEventListener('scroll', trackScroll,
+            { passive: true });
+
+        if (goTopBtn !== null) {
+            // обработка события 'click' для скролла
+            goTopBtn.addEventListener('click', goToTop);
+        }
+
+        function trackScroll() {
+            let scrolled = window.pageYOffset;
+
+            if (scrolled > 100) {
+                if (goTopBtn !== null) {
+                    goTopBtn.classList.add('btn-top-show');
+                }
+            }
+            if (scrolled < 100) {
+                if (goTopBtn !== null) {
+                    goTopBtn.classList.remove('btn-top-show');
+                }
+            }
+        }
+        // функция скролла наверх
+        function goToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
 }

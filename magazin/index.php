@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/jquery.js"></script>
-    <script defer src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
 
     <!-- <link rel="stylesheet" href="style/animate.css"> -->
     <link rel="stylesheet" href="/style/normalize.css">
@@ -61,7 +61,11 @@
         </main>
         <? include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.php';?>
     </div>
-
+    <script>
+        forShop();
+        //< !--скрипт добвления кнопки наверх-- >
+        addBtnGoToTop();
+    </script>
 </body>
 
 </html>

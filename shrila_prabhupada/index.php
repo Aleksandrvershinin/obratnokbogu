@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="../js/main.js"></script>
+    <script src="/js/main.js"></script>
     <!-- <link rel="stylesheet" href="style/animate.css"> -->
-    <link rel="stylesheet" href="../style/normalize.css">
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="/style/normalize.css">
+    <link rel="stylesheet" href="/style/style.css">
     <title>Биография Шрилы Прабхупады</title>
 </head>
 
@@ -60,6 +60,10 @@
         </main>
         <? include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.php';?>
     </div>
+    <!-- скрипт добвления кнопки наверх -->
+    <script>
+        addBtnGoToTop();
+    </script>
 </body>
 
 </html>

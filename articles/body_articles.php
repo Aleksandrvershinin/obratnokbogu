@@ -15,24 +15,21 @@ if (isset($_GET["path"]) && $_GET["path"] !== '') {
     $srcArticle = trim($srcArticle);
     // ищем нужную статью из GET запроса
     $key = searchArticle($srcArticle, $arrayArticles);
-    if ($key !== false) {
-        // подключаем нужную статью
-        include $_SERVER['DOCUMENT_ROOT'] . $arrayArticles[$key]['url'];
-    } else {
-        // подключаем страницу с ошибкой в случае неудачи поиска
-        include $_SERVER['DOCUMENT_ROOT'] . "/php/not_found.php";
-    }
 } else {
     //  ишем статью из URL
     $key = searchArticle($url, $arrayArticles);
-    if ($key !== false) {
-        // подключаем нужную статью
-        include $_SERVER['DOCUMENT_ROOT'] . $arrayArticles[$key]['url'];
-    } else {
-        // подключаем страницу с ошибкой в случае неудачи поиска
-        include $_SERVER['DOCUMENT_ROOT'] . "/php/not_found.php";
+}
+if ($key !== false) {
+    // подключаем нужную статью
+    include $_SERVER['DOCUMENT_ROOT'] . $arrayArticles[$key]['url'];
+    // проверяем основная ли страница, для подгрузки кнопки gototop
+    if ($arrayArticles[$key]['url'] !== "/articles/articles/index.php") {
     }
-}; ?>
+} else {
+    // подключаем страницу с ошибкой в случае неудачи поиска
+    include $_SERVER['DOCUMENT_ROOT'] . "/php/not_found.php";
+}
+?>
 </section>
 <script>
     //    функция передачи get параметров в JS
