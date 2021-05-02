@@ -12,7 +12,9 @@
 </head>
 
 <body id="biografiya-shrily-prabhupady">
-    <script src="../js/header.js"></script>
+    <? include $_SERVER['DOCUMENT_ROOT'] . '/php/header.php';?>
+    <button class="btn-go-to-top"></button>
+    <button class="btn-go-to-bottom"></button>
     <div class="main-and-footer">
         <main class="main">
             <section>

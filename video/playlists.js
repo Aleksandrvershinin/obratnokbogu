@@ -44,6 +44,10 @@ const playlists = [
                 href: "https://www.youtube.com/embed/loaioibSKxo",
             },
             {
+                name: "Парампара медитация",
+                href: "https://www.youtube.com/embed/DsulUzojgTU",
+            },
+            {
                 name: "Нектар Шрилы Прабхупады",
                 href: "https://www.youtube.com/embed/hJEkoZ1KiUk",
             },

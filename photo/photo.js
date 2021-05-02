@@ -6,17 +6,20 @@
     // список с фотографиями
     let photoListElement = document.querySelector('.photo__list');
 
-    // body полноэкранного режима просмотра фотографий
-    let fullScreenBody = document.querySelector('.photo__body__full-screen');
+    // body большого режима просмотра фотографий
+    let bigScreenBody = document.querySelector('.photo__body__big-screen');
 
     // box куда будем загружать полноэкранную фотографию
-    let fullScreenImg = document.querySelector('.photo__full-screen__img');
+    let bigScreenImg = document.querySelector('.photo__big-screen__img');
 
     // кнопка возврата к предыдущей фотографии
     let prevBtn = document.querySelector('.photo__prev__btn');
 
     // кнопка перехода к следующей фотографии
     let nextBtn = document.querySelector('.photo__next__btn');
+
+    // кнопка открытия полно-экранного режима
+    let fullScreenBtn = document.querySelector('.btn__open__full-screen');
 
     // счетчик фотографий
     let countPhoto = document.querySelector('.count__photo');
@@ -35,11 +38,11 @@
         let width = getWidthPhotoListElement();
 
         // высчитываем сколько фотографий поставить в ряд
-        let countPhoto = Math.floor(width / 200);
+        let countPhoto = Math.floor(width / 220);
 
         // устанавливаем ширину каждой фотографии
         photoItemElement.forEach(element => {
-            element.style.width = `${width / countPhoto - 5}px`;
+            element.style.width = `${width / 5 - 5}px`;
         });
 
     }
@@ -52,12 +55,15 @@
 
     //  отслеживаем клик по фотографиям
     photoItemElement.forEach((element, index) => {
+
         element.addEventListener('click', () => {
+            // убираем scroll
+            document.body.style.overflow = 'hidden';
             // показываем body полноэкранного режима просмотра фотографий
-            fullScreenBody.classList.remove('hide');
+            bigScreenBody.classList.remove('hide');
 
             // показываем фотографию по которой кликнули
-            fullScreenImg.src = element.children[0].src;
+            bigScreenImg.src = element.children[0].dataset.src;
             // записываем индекс текущей фотографии
             currentIndexPhoto = index;
 
@@ -68,14 +74,17 @@
 
 
     // отслеживаем клик по body полноэкранного режима просмотра фотографий
-    fullScreenBody.addEventListener('click', (e) => {
+    bigScreenBody.addEventListener('click', (e) => {
         // проверяем где произошел клик
-        if (e.target === document.querySelector('.form__close')) {
+        if (e.target === document.querySelector('.form__close__photo') || e.target === document.querySelector('.photo__body__big-screen')) {
             // если клик случился на нужном элементе прячем body полноэкранного режима просмотра фотографий
-            fullScreenBody.classList.add('hide');
+            bigScreenBody.classList.add('hide');
 
             // удаляем ссылку на фотографию
-            fullScreenImg.removeAttribute('src');
+            bigScreenImg.removeAttribute('src');
+
+            // включаем scroll
+            document.body.style.overflow = "";
         }
     });
 
@@ -113,8 +122,61 @@
             }
         }
         // показываем фотографию
-        fullScreenImg.src = photoItemElement[currentIndexPhoto].children[0].src;
+        bigScreenImg.src = photoItemElement[currentIndexPhoto].children[0].dataset.src;
         // счетчик фотографий
         countPhoto.textContent = `${currentIndexPhoto + 1}/${photoItemElement.length}`;
     }
+
+    // отслеживаем клик и открываем полно-экранный режим
+    fullScreenBtn.addEventListener('click', openFullScreen);
+
+
+    // отслеживаем событие изменение полно-экранного режима
+    document.addEventListener('fullscreenchange', checkFullScreen);
+
+
+    // функция проверки полно-экранного режима
+    function checkFullScreen() {
+        // если элемент не в полноэкранном режиме, выходим из просмотра fullScreen
+        if (!document.fullscreenElement) {
+            bigScreenBody.classList.remove('photo__body__full-screen');
+        }
+    }
+
+    // открытие полно-экранного режима
+    function openFullScreen() {
+        bigScreenBody.classList.toggle('photo__body__full-screen');
+        // если элемент уже в полноэкранном режиме, выйти из него
+        // В противном случае войти в полный экран
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            document.documentElement.requestFullscreen();
+        }
+    }
+
+
+    // lazy load
+
+    let options = {
+        root: null,
+        rootNargin: "0px",
+        threshold: 0.1,
+    }
+
+    function handleImg(myImg) {
+        myImg.forEach(elem => {
+            if (elem.intersectionRatio > 0) {
+                loadImg(elem.target);
+            }
+        });
+    }
+    function loadImg(elem) {
+        elem.children[0].src = elem.children[0].dataset.src
+    }
+    let observer = new IntersectionObserver(handleImg, options);
+
+    photoItemElement.forEach(elem => {
+        observer.observe(elem);
+    });
 })();

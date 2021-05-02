@@ -1,5 +1,8 @@
-
-
+import { startMarquee } from '/audio/audio_js/marquee.js';
+import { scroll } from '/audio/audio_js/scroll.js';
+import { drowPlaylists, markerPlaylist } from '/audio/audio_js/drowPlaylists.js';
+// функция добавления к каждому плейлисту id
+addIdToAllPlaylist();
 // функция добавления к каждому треку уникального id
 addIdToAllTracks()
 
@@ -15,9 +18,6 @@ let marqueeWrapper = document.querySelector('.audio-player-name-track');
 let marquee1 = document.querySelector('.audio-player-name-track-marquee1');
 // вторая бегущая строка с название трека
 let marquee2 = document.querySelector('.audio-player-name-track-marquee2');
-
-// тег для добавления списка плейлистов
-let playlistsList = document.querySelector('.audio-playlists-list');
 
 // тег для добавления списка треков
 let playlistList = document.querySelector('.audio-playlist-list');
@@ -54,8 +54,6 @@ let bodyActionButton = document.getElementById("audio-player-body-play");
 let muteButton = document.getElementById("audio-hud-mute");
 
 let volumeScale = document.getElementById("audio-hud-volume");
-
-let speedSelect = document.getElementById("audio-hud-speed");
 
 let btnSearch = document.querySelector('.audio-playlists-form-btn');
 
@@ -98,16 +96,13 @@ if (safeInfo == null) {
 
 // проверка колличества символов
 formInputSearch.addEventListener('input', () => {
-    if (formInputSearch.value.trim().length < 3) {
+    if (formInputSearch.value.trim().length < 2) {
         formInputSearch.classList.add('is-error');
-        audioPlaylistsFormLabel.textContent = 'Введите не менее 3 символов'
     } else {
         formInputSearch.classList.remove('is-error');
-        audioPlaylistsFormLabel.textContent = ''
     }
     if (formInputSearch.value.trim().length === 0) {
         formInputSearch.classList.remove('is-error');
-        audioPlaylistsFormLabel.textContent = ''
     }
 });
 
@@ -158,10 +153,6 @@ nextButton.addEventListener('click', () => {
 });
 
 
-// заполняем плейлисты
-filingPlaylists()
-
-
 // отслеживаем клик и заполняем перемешанный плейлист
 mixButton.addEventListener('click', () => {
     mixArray();
@@ -171,7 +162,7 @@ audioPlayer.onloadedmetadata = function () {
     durationTime.innerHTML = audioTime(this.duration)
 };
 // устанавливаем градиент для времени
-progressBar.style.background = `-webkit-linear-gradient(left, #fff 0%, #fff ${progressBar.value}%, #000 ${progressBar.value}%, #000 100%)`;
+progressBar.style.background = `-webkit-linear-gradient(left, rgb(38, 111, 170) 0%, rgb(38, 111, 170) ${progressBar.value}%, #000 ${progressBar.value}%, #000 100%)`;
 // устанавливаем градиент для звука
 volumeScale.style.background = `-webkit-linear-gradient(left, #fff 0%, #fff ${volumeScale.value}%, rgb(100, 100, 100) ${volumeScale.value}%, rgb(100, 100, 100) 100%)`;
 
@@ -203,31 +194,6 @@ loopButton.addEventListener('click', () => {
     };
 });
 
-function scroll() {
-    let myElement = document.querySelector('.audio-playlist-item.audio-item-is-active');
-    let topPos = myElement.offsetTop;
-    document.querySelector('.simplebar-content-wrapper').scrollTop = topPos;
-}
-
-// добовляем в переменную элементы плей листов
-let audioPlaylists = document.querySelectorAll('.audio-playlists-item');
-
-// отслеживаевае клики по плейлистам
-audioPlaylists.forEach((e, i) => {
-    e.addEventListener('click', () => {
-        audioPlaylists.forEach(e => {
-            e.classList.remove('audio-item-is-active')
-        });
-        audioPlaylists[i].classList.add('audio-item-is-active');
-        filingPlaylist(lookforPlaylistByName(audioPlaylists[i].textContent));
-        if (currentPlaylistIsActive.length !== 0) {
-            changeButton(searchTrackInPlaylist(currentPlaylist))
-        };
-    });
-});
-
-
-
 
 //Запуск, пауза
 
@@ -239,9 +205,7 @@ audioPlayer.addEventListener('ended', () => {
     //  отключение плеера когда заканчивается последний трек в плейлисте
     if (loopCheck === 0) {
         if (currentIndexTrack !== currentPlaylistIsActive.length - 1) {
-            currentIndexTrack++;
-            setTrack(currentIndexTrack);
-            audioAct();
+            playTimeout();
         } else {
             audioPlayer.pause()
             changeButton(searchTrackInPlaylist(currentPlaylist))
@@ -251,17 +215,27 @@ audioPlayer.addEventListener('ended', () => {
     //   автоматический переход к следующему треку
     if (loopCheck === 1) {
         if (currentIndexTrack !== currentPlaylistIsActive.length - 1) {
-            currentIndexTrack++;
-            setTrack(currentIndexTrack);
-            audioAct();
+            playTimeout();
         } else {
-            currentIndexTrack = 0;
-            setTrack(currentIndexTrack);
-            audioAct();
+            currentIndexTrack = -1;
+            playTimeout();
         };
     };
 });
-
+// фукция отложенного старта следующего трека
+function playTimeout() {
+    setTimeout(() => {
+        playNextTrack();
+        // подкручиваем что бы активный трек оставался на виду
+        scroll(true);
+    }, 2000);
+}
+// функция старта следующего трека
+function playNextTrack() {
+    currentIndexTrack++;
+    setTrack(currentIndexTrack);
+    audioAct();
+}
 
 
 //Отображение времени
@@ -311,13 +285,37 @@ window.addEventListener('keydown', (e) => {
         }
     }
 });
-
+// загружаем плейлисты
+drowPlaylists(currentIdPlaylist);
 // загружаем страничку
 loadPage();
 
+// добовляем в переменную элементы плей листов
+let audioPlaylists = document.querySelectorAll('.audio-playlists-item');
+// подсвечиваем плейлист
+markerCurrentPlaylist();
+// отслеживаевае клики по плейлистам
+audioPlaylists.forEach((e, i) => {
+    e.addEventListener('click', () => {
+        audioPlaylists.forEach(e => {
+            e.classList.remove('audio-item-is-active')
+        });
+        audioPlaylists[i].classList.add('audio-item-is-active');
+        filingPlaylist(lookforPlaylistByName(audioPlaylists[i].textContent));
+        if (currentPlaylistIsActive.length !== 0) {
+            changeButton(searchTrackInPlaylist(currentPlaylist))
+        };
+    });
+});
 
-
-
+// функция добавления к каждому плейлисту id
+function addIdToAllPlaylist() {
+    let id = 1
+    playLists.forEach((element) => {
+        element.id = id;
+        id++
+    })
+};
 
 // функция добавления к каждому треку уникального id
 function addIdToAllTracks() {
@@ -420,7 +418,6 @@ function lookforTrack(key, name) {
                 if (e[key] == name) {
                     playlist = element.tracks;
                     idTrack = e.id;
-                    currentIdPlaylist = element.id;
                     idPlaylist = element.id;
                     return;
                 };
@@ -442,12 +439,12 @@ function markerCurrentPlaylist() {
 }
 // фильтрация массива на одинаковые названия треков
 function filterArray(array) {
-    newArray = [];
+    let newArray = [];
     array.forEach(e => {
         if (newArray.length === 0) {
             newArray.push(e);
         } else {
-            for (i = 0; i < newArray.length; i++) {
+            for (let i = 0; i < newArray.length; i++) {
                 let check = i;
                 if (e.name !== newArray[i].name) {
                     check++
@@ -464,31 +461,30 @@ function filterArray(array) {
 }
 // функция поиска треков
 function searchTracks() {
+    let stringSearch = formInputSearch.value.toLowerCase().trim();
     let findedTracks = [];
     playLists.map(element => {
         element.tracks.map(el => {
-            if (el.name.toLowerCase().replace(/[()\\/\s]/gi, '').search(formInputSearch.value.toLowerCase().replace(/[()\\/\s]/gi, '')) !== -1 && formInputSearch.value.trim() != '') {
+            if (el.name.toLowerCase().trim().search(stringSearch) !== -1 && stringSearch != '') {
                 findedTracks.push(el)
             }
         })
     })
     let newfindedTracks = filterArray(findedTracks)
-    return newfindedTracks
-    // return findedTracks
-};
+    return newfindedTracks;
+}
 // запускаем поиск
 function startSearch() {
-    if (formInputSearch.value.trim().length < 3) { } else {
-        filingPlaylist(searchTracks());
+    if (formInputSearch.value.trim().length > 1) {
+        filingPlaylist(searchTracks(), formInputSearch.value.toLowerCase().trim());
         audioPlaylists.forEach(e => {
-            e.classList.remove('audio-item-is-active')
+            e.classList.remove('audio-item-is-active');
             formInputSearch.value = '';
         });
-
     }
 }
 //функция заполнения плей листа
-function filingPlaylist(namePlaylist) {
+function filingPlaylist(namePlaylist, stringSearch = false) {
     let audioPlaylist = document.querySelectorAll('.audio-playlist-item');
     audioPlaylist.forEach(e => {
         e.remove();
@@ -497,9 +493,19 @@ function filingPlaylist(namePlaylist) {
     namePlaylist.map((e, i) => {
         currentPlaylist.push(e);
         let li = document.createElement('li');
-        li.classList.add('audio-playlist-item')
+        li.classList.add('audio-playlist-item');
         playlistList.append(li);
-        e.sliceName = e.name;
+        e.markName = e.name;
+        // проверяем активен ли поиск
+        if (stringSearch) {
+            // записываем индекс начала вхождения
+            let start = e.name.toLowerCase().trim().search(stringSearch);
+            // записываем длинну строки
+            let length = stringSearch.length;
+            // отмечаем подстроки
+            // debugger
+            e.markName = e.name.substring(0, start) + "<mark>" + e.name.substring(start, start + length) + "</mark>" + e.name.substring(start + length);
+        }
         let uri = `https://obratnokbogu.ru/audio/${e.nameTranslit}`;
         li.innerHTML = `
             <button class="audio-playlist-item-body-play">
@@ -514,9 +520,7 @@ function filingPlaylist(namePlaylist) {
             </button>
             <audio preload="none" class="audio1" src="${e.src}"></audio>
             <div class="audio-playlist-item-info-playlist">
-              <p title="${e.name}" class="audio-playlist-item-name-track">${e.sliceName}
-
-                </p>
+                <p title="${e.name}" class="audio-playlist-item-name-track">${e.markName}</p>
                 <span class='audio-playlist-item-name-track-points'>...</span>
             </div>
             <div class="audio-playlist-item-btns">
@@ -526,14 +530,33 @@ function filingPlaylist(namePlaylist) {
                </button>
                <div class="ya-share2" data-url="${uri}" data-title="${e.name}" data-image="https://obratnokbogu.ru/media/sh.jpg" data-more-button-type="short" data-popup-direction="auto" data-popup-position="outer" data-direction="horizontal" data-limit="0" data-copy="last" data-shape="round" data-size="s" data-services="vkontakte,facebook,odnoklassniki,telegram,whatsapp,viber"></div>
             </div>`;
-        if (e.name.length > 87) {
-            addPointsNameTracks(i)
-        };
+
+        // if (e.name.length > 87) {
+        //     addPointsNameTracks(i)
+        // };
+        // cutName(i);
     });
     clickAudioPlaylistPlay();
     // запуск скрипта поделиться
     initShare();
 };
+// // функция обрезки имени
+// function cutName(index) {
+//     let div = document.querySelectorAll('.audio-playlist-item-info-playlist');
+//     let nameTrackElement = document.querySelectorAll('.audio-playlist-item-name-track');
+//     let wDiv = div[index].clientWidth;
+//     cut();
+//     function cut() {
+//         let wNameTrack = nameTrackElement[index].clientWidth;
+//         if (wNameTrack > wDiv) {
+//             let nameTrack = nameTrackElement[index].textContent.trim();
+//             console.log(nameTrack);
+//             nameTrackElement[index].textContent = nameTrack.substring(0, nameTrack.length - 1);
+//             cut();
+//         }
+//     }
+// }
+
 // функция инцилизации скрипта поделиться
 function initShare() {
     let scriptShare = document.querySelector('.script-share');
@@ -711,15 +734,7 @@ function clickAudioPlaylistPlay() {
         });
     });
 };
-// заполняем плейлисты
-function filingPlaylists() {
-    playLists.forEach((e, i) => {
-        let li = document.createElement('li');
-        li.classList.add('audio-playlists-item')
-        playlistsList.append(li);
-        li.textContent = e.name
-    });
-};
+
 // функция перемешивания плей листа
 function mixArray() {
     if (currentPlaylistIsActive !== undefined && currentPlaylistIsActive.length != 0) {
@@ -751,19 +766,20 @@ function loadPage() {
     let checkPlay = false;
     // проверяем найден ли плейлист
     if (result['playlist'] !== undefined) {
+        // если трек был найден по названию устанвливаем проверку на true, далее попробуем включить авто плей
         checkPlay = true;
     } else {
         // ищем трек по id
         result = lookforTrack('id', currentIdTrack);
     }
+    // id текущего плей листа
+    currentIdPlaylist = result['idPlaylist'];
     // заполняем список треков
     filingPlaylist(result['playlist']);
     // устанавливаем трек
     currentIdTrack = result['idTrack'];
     // подсвечиваем трек
     markerCurrentTrack(searchTrackInPlaylist(currentPlaylist, currentIdTrack));
-    // подсвечиваем плейлист
-    markerCurrentPlaylist();
     // прокручиваем к треку
     setTimeout(scroll, 1);
     // загружаем плейлист в плеер
@@ -776,14 +792,15 @@ function loadPage() {
     }
 }
 
-
 function audioAct() { //Запускаем или ставим на паузу
     if (audioPlayer.src) {
         if (audioPlayer.paused) {
             audioPlayer.play();
             currentIdTrack = currentPlaylistIsActive[currentIndexTrack].id
             localStorage.setItem('safeInfoTrack', JSON.stringify(currentIdTrack));
-            changeButton(searchTrackInPlaylist(currentPlaylist))
+            changeButton(searchTrackInPlaylist(currentPlaylist));
+            // функция отметки плейлиста
+            markerPlaylist(currentIdTrack, lookforTrack);
         } else {
             audioPlayer.pause();
             changeButton(searchTrackInPlaylist(currentPlaylist))
@@ -833,11 +850,8 @@ function audioProgress() { //Отображаем время воспроизв�
     if (x === progress) {
         progressBar.value = progress
     };
-
-
-
     currTime.innerHTML = audioTime(audioPlayer.currentTime);
-    progressBar.style.background = `-webkit-linear-gradient(left, #fff 0%, #fff ${progressBar.value}%, #000 ${progressBar.value}%, #000 100%)`;
+    progressBar.style.background = `-webkit-linear-gradient(left, rgb(38, 111, 170) 0%, rgb(38, 111, 170) ${progressBar.value}%, #000 ${progressBar.value}%, #000 100%)`;
     if (progressBar.value == 100) {
         progressBar.style.borderRight = '1px solid #000'
     } else {
@@ -849,7 +863,7 @@ function audioProgress() { //Отображаем время воспроизв�
 function audioChangeTime() { //Перематываем
     let mouseX = progressBar.value;
     audioPlayer.currentTime = audioPlayer.duration / 100 * mouseX
-    progressBar.style.background = `-webkit-linear-gradient(left, #fff 0%, #fff ${progressBar.value}%, #000 ${progressBar.value}%, #000 100%)`;
+    progressBar.style.background = `-webkit-linear-gradient(left, rgb(38, 111, 170) 0%, rgb(38, 111, 170) ${progressBar.value}%, #000 ${progressBar.value}%, #000 100%)`;
     if (mouseX == 100) {
         progressBar.style.borderRight = '1px solid #000'
     } else {
@@ -885,5 +899,3 @@ function audioMute() { //Убираем звук
         muteButton.setAttribute("class", "audio-hud-element audio-hud-mute audio-hud-mute-true");
     }
 };
-import { startMarquee } from '/audio/audio_js/marquee.js';
-

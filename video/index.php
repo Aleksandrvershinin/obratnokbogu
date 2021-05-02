@@ -14,7 +14,7 @@
 </head>
 
 <body id="video">
-    <script src="/js/header.js"></script>
+    <? include $_SERVER['DOCUMENT_ROOT'] . '/php/header.php';?>
     <div class="main-and-footer">
         <main class="main">
 
@@ -61,15 +61,15 @@
                                     миру.
                                 </p>
                             </div>
-                            <div class="video-playlist video-playlist1">
+                            <div class="video-playlist video-playlist1 user-select-none">
                             </div>
-                            <div class="video-playlist video-playlist2">
+                            <div class="video-playlist video-playlist2 user-select-none">
                             </div>
-                            <div class="video-playlist video-playlist3">
+                            <div class="video-playlist video-playlist3 user-select-none">
                             </div>
-                            <div class="video-playlist video-playlist4">
+                            <div class="video-playlist video-playlist4 user-select-none">
                             </div>
-                            <div class="video-playlist video-playlist5">
+                            <div class="video-playlist video-playlist5 user-select-none">
                             </div>
                         </div>
                     </div>

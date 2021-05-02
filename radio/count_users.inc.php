@@ -1,11 +1,12 @@
 <?php
+
 function countUsers($s = 1)
 {
     session_start();
     //выделяем уникальный идентификатор сессии
     $id = session_id();
 
-    if ($id!="") {
+    if ($id != "") {
         //текущее время
         $CurrentTime = time();
 
@@ -23,13 +24,13 @@ function countUsers($s = 1)
         // проходим по всем строкам в файле
         for ($i = 0; $i < sizeof($file); $i++) {
 
-        //  записываем строку в массив разделяя с помощью разделителя
+            //  записываем строку в массив разделяя с помощью разделителя
             $line = explode("|", $file[$i]);
 
             // проверяем прошло ли время
             if ($line[1] > $LastTime) {
 
-            // если время не пройдено заносим строку с этим пользователем в массив
+                // если время не пройдено заносим строку с этим пользователем в массив
                 $ResFile[$k] = $file[$i];
 
                 // добавляем ключу 1
@@ -38,7 +39,7 @@ function countUsers($s = 1)
         }
 
         //  проходимся по всему массиву с пользователями у которых не прошло время
-        for ($i = 0; $i<sizeof($ResFile); $i++) {
+        for ($i = 0; $i < sizeof($ResFile); $i++) {
 
             //  записываем строку в массив разделяя с помощью разделителя
             $line = explode("|", $ResFile[$i]);
@@ -47,7 +48,7 @@ function countUsers($s = 1)
             if ($line[0] == $id) {
 
                 // присваеваем текущее время
-                $line[1] = trim($CurrentTime)."\n";
+                $line[1] = trim($CurrentTime) . "\n";
 
                 // записываем что текущая сесия обновилась
                 $is_sid_in_file = 1;
@@ -63,7 +64,7 @@ function countUsers($s = 1)
         $fp = fopen($base, "w");
 
         // заполняем файл пользователями с не прошедшим временем
-        for ($i = 0; $i<sizeof($ResFile); $i++) {
+        for ($i = 0; $i < sizeof($ResFile); $i++) {
             fputs($fp, $ResFile[$i]);
         }
 
@@ -77,7 +78,7 @@ function countUsers($s = 1)
             $fp = fopen($base, "a-");
 
             // создаем строку с текущей сессией и временем
-            $line = $id."|".$CurrentTime."\n";
+            $line = $id . "|" . $CurrentTime . "\n";
 
             // записываем строку в файл
             fputs($fp, $line);

@@ -21,18 +21,20 @@
 </head>
 
 <body>
-    <script src="/js/header.js"></script>
+    <? include $_SERVER['DOCUMENT_ROOT'] . '/php/header.php';?>
+    <button class="btn-go-to-top"></button>
+    <button class="btn-go-to-bottom"></button>
     <div class="main-and-footer">
         <main class="main">
-            <section>
+            <section class="photo__section">
                 <div class="container photo__container">
-                    <h1 class="photo__title">Архив фотографий Шрилы Прабхупады</h1>
+                    <h1 class="photo__title">Фотографии Шрилы Прабхупады</h1>
                     <ul class="photo__list">
                         <?
                         foreach ($files as $file) { ?>
 
-                        <li class="photo__item">
-                            <img class="photo__item__img" src=" /media/photo/<?= $file ?>" alt="Фотография Шрилы Прабхупады">
+                        <li class="photo__item user-select-none">
+                            <img class="photo__item__img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src=" /media/photo/<?= $file ?>" alt="Фотография Шрилы Прабхупады">
                         </li>
 
                         <? }?>
@@ -41,16 +43,15 @@
                         Смотреть архив полностью
                     </a>
                 </div>
-                <div class="photo__body__full-screen hide">
-                    <div class="form__close1"></div>
-                    <div class="form__close2"></div>
-                    <div class="form__close"></div>
-                    <div class="photo__full-screen__item">
-                        <div class="photo__prev__btn"></div>
-                        <div class="photo__full-screen__box__img">
-                            <img class="photo__full-screen__img" alt="Фотография Шрилы Прабхупады">
+                <div class="photo__body__big-screen hide">
+                    <div class="form__close form__close__photo"></div>
+                    <div class="photo__big-screen__item">
+                        <button class="photo__prev__btn"></button>
+                        <div class="photo__big-screen__box__img user-select-none">
+                            <img class="photo__big-screen__img" alt="Фотография Шрилы Прабхупады">
                         </div>
-                        <div class="photo__next__btn"></div>
+                        <button class="photo__next__btn"></button>
+                        <button class="btn__open__full-screen"></button>
                         <div class="count__photo"></div>
                     </div>
                 </div>

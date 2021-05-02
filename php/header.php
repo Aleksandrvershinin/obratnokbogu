@@ -1,3 +1,10 @@
+<?php
+// подключаем файл с меню
+include_once $_SERVER['DOCUMENT_ROOT'] . '/php/main_menu.php';
+// подключаем файл с функциями
+include_once $_SERVER['DOCUMENT_ROOT'] . '/php/functions.php';
+?>
+
 <header class="header">
     <div class="container header-container">
         <div class="header-logo">
@@ -6,7 +13,16 @@
         </div>
         <nav class="header-nav">
             <ul class="header-nav-lists">
-                <li class="header-nav-item">
+                <?php
+                foreach ($menu as $key => $value) {
+                ?>
+                    <li class="header-nav-item <? if (isCurrentUrl($value['path'])) echo 'is-active'; ?>">
+                        <a href="<?= $value['path']; ?>"><?= $value['title']; ?></a>
+                    </li>
+                <?php
+                }
+                ?>
+                <!-- <li class="header-nav-item">
                     <a href="/audio">аудио</a>
                 </li>
                 <li class="header-nav-item">
@@ -26,46 +42,19 @@
                 </li>
                 <li class="header-nav-item">
                     <a href="#">база поиска</a>
-                </li>
+                </li> -->
             </ul>
         </nav>
-        <div class="header-shopping-cart">
-            <div class="header-shopping-cart-count"></div>
-            <div class="header-shopping-cart-line"></div>
-            <a href="/shopcart"></a>
-        </div>
+        <button class="header-night-btn"></button>
         <div class="header-radio">
-            <a target="blank" href="/radio">радио - Прабхупада</a>
+            <div class="box-header-radio">
+                <div class="body-icon-play-header-radio">
+                    <div class="icon-play-header-radio">
+                    </div>
+                </div>
+                <p class="header-radio-text">радио - Прабхупада</p>
+            </div>
+            <a target=" blank" href="/radio"></a>
         </div>
     </div>
 </header>
-<script>
-    window.goodsInShoppingCart;
-    window.getLocalStorage = function() {
-        goodsInShoppingCart = localStorage.getItem('goodsInShoppingCart');
-        if (goodsInShoppingCart === null) {
-            goodsInShoppingCart = [];
-        } else {
-            goodsInShoppingCart = JSON.parse(goodsInShoppingCart);
-        }
-    }
-
-    // функция счетчика колличества товаров в корзине
-    window.countShoppingCart = function() {
-        getLocalStorage()
-        let quantitygoodsInShoppingCartElem = document.querySelector('.header-shopping-cart-count');
-        if (goodsInShoppingCart.length === 0) {
-            quantitygoodsInShoppingCartElem.style.display = 'none';
-        } else {
-            quantitygoodsInShoppingCartElem.style.display = '';
-            quantitygoodsInShoppingCartElem.textContent = goodsInShoppingCart.length;
-        }
-    }
-    getLocalStorage()
-    // вешаем обработчик на LocalStorage
-    window.addEventListener('storage', () => {
-        getLocalStorage();
-        countShoppingCart();
-    });
-    countShoppingCart();
-</script>

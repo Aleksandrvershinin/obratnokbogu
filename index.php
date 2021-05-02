@@ -20,8 +20,9 @@
 </head>
 
 <body id="main">
-   <script src="/js/header.js"></script>
-
+   <? include $_SERVER['DOCUMENT_ROOT'] . '/php/header.php'; ?>
+   <button class="btn-go-to-top"></button>
+   <button class="btn-go-to-bottom"></button>
    <div class="main-and-footer">
       <main class="main">
          <section class="section first-section">
@@ -39,7 +40,7 @@
                         <p> общества сознания Кришны</p>
                      </div>
 
-                     <button class="btn first-container-block1-btn first-container-block-btn">
+                     <button class="btn first-container-block1-btn first-container-block-btn user-select-none">
                         <div class="first-container-btn-number">
                            <p>8</p>
                         </div>
@@ -55,11 +56,11 @@
                      <h1>
                         Обратно к Богу
                      </h1>
-                     <div class="first-container-block2-img first-container-block-img">
+                     <div class="first-container-block2-img first-container-block-img user-select-none">
                         <a href="/shrila_prabhupada"><img src="media/img/prabhupada.jpg" title="Биография Шрилы Прабхупады" alt="prabhupada"></a>
                      </div>
 
-                     <button class="btn first-container-block2-btn first-container-block-btn">
+                     <button class="btn first-container-block2-btn first-container-block-btn user-select-none">
                         <div class="first-container-btn-number">
                            <p>16</p>
                         </div>
@@ -85,7 +86,7 @@
                         <p>пашчатйа-деша-тарине</p>
                      </div>
 
-                     <button class="btn first-container-block3-btn first-container-block-btn">
+                     <button class="btn first-container-block3-btn first-container-block-btn user-select-none">
                         <div class="first-container-btn-number">
                            <p>1008</p>
                         </div>
@@ -95,9 +96,17 @@
                         </div>
                         <a href="audio/bg_vvedenie_chast_1_avtoritetnost_bhagavad_gity_i_verhovnoy_lichnosti_boga_19_02_1966_g_nyu_york_shrila_prabhupada"></a>
                      </button>
-
-
                   </div>
+               </div>
+               <div class="first-container-quote">
+                  <p>
+                     Этот мир не является нашим домом. Он – промежуточная станция, остановка в пути. Мы здесь мимоходом, чтобы выполнить определенную задачу. Здесь нам не стоит задерживаться. Не нужно тратить силы на то, чтобы расположиться здесь и устроить себе комфортную и долгую жизнь в этом мире. Нам нужно вернуться домой.
+
+                  </p>
+                  <p>
+                     Шрила Бхактисиддханта Сарасвати Госвами Тхакур Прабхупада
+                     (14 июня 1935 год, Дарджилинг, Индия)
+                  </p>
                </div>
             </div>
          </section>
@@ -112,26 +121,26 @@
                   ясными комментариями, «поразили литературное и научное сообщество во всем мире».</p>
                <ul class="books-container-list">
                   <li class="books-container-item">
-                     <a href="pages/za-predelami-rozhdeniya-i-smerti.html"> <img src="media/img/book_za_predelami_rozgdeniya_i_smerti.jpg" alt=""></a>
+                     <a href="/magazin/za_predelami_rozgdeniya_i_smerti"> <img class="user-select-none" src="media/img/book_za_predelami_rozgdeniya_i_smerti.jpg" alt=""></a>
                      <p class="magazin-book-name">За пределами <br> рождения и смерти<br>50 ₽</p>
                   </li>
                   <li class="books-container-item">
-                     <a href="pages/sovershenstvo-iogi.html">
-                        <img src="media/img/book_sovershenstvo_iogi.jpg" alt=""></a>
+                     <a href="/magazin/sovershenstvo_yogi">
+                        <img class="user-select-none" src="media/img/book_sovershenstvo_iogi.jpg" alt=""></a>
                      <p class="magazin-book-name">Совершенство<br>йоги<br>50 ₽</p>
                   </li>
                   <li class="books-container-item">
-                     <a href="/magazin/sovershennyye_voprosy_sovershennyye_otvety"><img src="media/img/book_sovershenie_voprosi.jpg" alt=""></a>
+                     <a href="/magazin/sovershennyye_voprosy_sovershennyye_otvety"><img class="user-select-none" src="media/img/book_sovershenie_voprosi.jpg" alt=""></a>
                      <p class="magazin-book-name">Совершенные вопросы,<br>совершенные ответы<br>100 ₽</p>
                   </li>
                   <li class="books-container-item">
                      <a>
-                        <img src="media/img/book_nektar_nastavlenii.jpg" alt=""></a>
+                        <img class="user-select-none" src="media/img/book_nektar_nastavlenii.jpg" alt=""></a>
                      <p class="magazin-book-name">Нектар<br>наставлений</p>
                   </li>
                   <li class="books-container-item">
                      <a>
-                        <img src="media/img/book_legkoe_puteshestvie_na_drugie_planeti.jpg" alt=""></a>
+                        <img class="user-select-none" src="media/img/book_legkoe_puteshestvie_na_drugie_planeti.jpg" alt=""></a>
                      <p class="magazin-book-name">Легкое путешествие<br>на другие планеты</p>
                   </li>
                </ul>
@@ -158,7 +167,7 @@
 
                <div class="about__shrila__box">
                   <div class="about__shrila__box__content">
-                     <img class="about__shrila__img" src="/media/img/about_shrila.jpg" alt="">
+                     <img class="about__shrila__img user-select-none" src="/media/img/about_shrila.jpg" alt="">
                      <p class="about__shrila_description text-weight-700 text-center"> Ом Вишнупада Парамахамса Паривраджакачарья Ашотара Шата Шри Шримад Триданди Госвами Его Божественная Милость Абхай Чаранаравинда Бхактиведанта Свами Шрила Прабхупада Махараджа</p></br>
 
                      <p class="about__shrila_description text__center"> 1. Ом Вишнупада - Тот, кто принял прибежище у стоп Господа Вишну. 2. Парамахамса - Санньяси (монах принявший обет отречения) высшего уровня (есть 4 стадии санньясы, Парамахаса — это высшая стадия). 3.Паривраджакачарья - Странствующий проповедник .4. Ашотара Шата - священное число 108. 5.Шри Шримад - Примерно переводится на русский как "благословенный" 6. Триданди Госвами - Тот, кто принял триданда санньясу - титул всех санньяси в линии от Шрилы Бхактисиддханты Срасвати Тхакура. Триданда, три посоха связанные воедино указывают на то, что вайшнав принимая санньясу дает обет использовать в служении Богу полностью свои ум, тело и речь. Триданди — это тот, кто принял триданду. Госвами означает: "го - чувства, свами - хозяин, повелитель", то есть повелитель чувств. 7. Его Божественная Милость – Духовный учитель - представитель Бога, Божественная Милость Кришны. 8. Абхай Чаранаравинда - имя, которое Шрила Прабхупада получил при инициации, буквально означает: "Тот, кто обрел бесстрашие, приняв прибежище у лотосных стоп Господа". При рождении родители дали Шриле Прабхупаде имя Абхай (бесстрашный), при инициации Шрила Бхактисиддханта Сарасвати добавил "Чаранаравинда". 9.Бхактиведанта - титул присвоенный Шриле Прабхупаде его духовными братьями, Бхактиведанта означает "постигший суть философии бхакти". 10.Свами - имя санньяси, которое Шрила Прабхупада получил при посвящении в санньясу, не путать с титулом "Свами = Госвами". 11. Прабхупада - "Тот, кто принял прибежище у стоп Прабху - Бога", другой перевод: "Великий учитель, у стоп которого нашли прибежище многие другие учителя" 12. Махараджа - Уважительно обращение к санньяси , буквально значит - Великий царь (повелитель), тот кто обрел власть над умом и чувствами.</p>
@@ -236,7 +245,7 @@
             </div>
          </section>
       </main>
-      <? include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.php';?>
+      <? include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.php'; ?>
    </div>
 
    <!-- скрипт добвления кнопки наверх -->

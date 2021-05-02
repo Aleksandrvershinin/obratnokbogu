@@ -84,6 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       } else {
          donationBtnSumBody[index].classList.add('is-active');
+         // прячем инпут для ввода суммы
+         donationFormItemSum.classList.add('hide');
+         document.querySelector('[data-sum-body=""]').classList.remove('hide');
       }
    }
 
@@ -96,14 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
          donationFormInputSum.value = element.dataset.sumBody;
 
          getBtnActive(index);
-         // проверяем если значение равно 0 показываем инпут для самостоятельного ввода суммы
-         if (Number(donationFormInputSum.value) === 0) {
+         // проверяем если значение равно пустой строке показываем инпут для самостоятельного ввода суммы
+         if (element.dataset.sumBody === "") {
 
             // показваем инпут для ввода суммы
             donationFormItemSum.classList.remove('hide');
-            document.querySelector('[data-sum-body="0"]').classList.add('hide');
+            document.querySelector('[data-sum-body=""]').classList.add('hide');
             // устанавливаем в значение суммы пустую строку
-            donationFormInputSum.value = "";
+            // donationFormInputSum.value = "";
 
          }
          // проверяем если значение пустое запрещаем отправку

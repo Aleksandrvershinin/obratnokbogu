@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         main(goods);
     };
     function main(goods) {
+
         // получаем элемент в который будем загружать карточки книг
         const containerListBook = document.querySelector('.shopping-cart__list');
 
@@ -22,7 +23,23 @@ document.addEventListener('DOMContentLoaded', () => {
             parametr === 1 ? i.classList.add('hide') : i.classList.remove('hide');
 
         }
-
+        // получаем данные из localSyorage
+        let goodsInShoppingCart = getLocalStorage();
+        // функция получения данных из localStorage
+        function getLocalStorage() {
+            let goodsInShoppingCart = localStorage.getItem('goodsInShoppingCart');
+            if (goodsInShoppingCart === null) {
+                goodsInShoppingCart = [];
+            } else {
+                goodsInShoppingCart = JSON.parse(goodsInShoppingCart);
+            }
+            return goodsInShoppingCart;
+        }
+        // вешаем обработчик на LocalStorage
+        window.addEventListener('storage', () => {
+            goodsInShoppingCart = getLocalStorage();
+            createCartsItem();
+        });
         // функция создания карточек товаров
         function createCartsItem() {
             // удаляем ранее созданные карточки
@@ -38,10 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
             let totalGoods = 0;
             let totalSum = 0;
             let totalWeight = 0;
+
             // создаем итерацию по всему массиву с ключами товаров
             goodsInShoppingCart.forEach(element => {
 
-                // получаем элементы в которые будем загружать информацию о книге
+                // получаем элементы в которые будем загружать информацию о товаре
                 let name = templateShoppingCart.content.querySelector('.shopping-cart__item__name');
                 let href = templateShoppingCart.content.querySelector('.shopping-cart__item__href');
                 let img = templateShoppingCart.content.querySelector('.shopping-cart__item__img');
@@ -49,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let btn = templateShoppingCart.content.querySelector('.shopping-cart__item__panel_delete');
                 let totalPrice = templateShoppingCart.content.querySelector('.shopping-cart__item__total-price');
                 let weight = templateShoppingCart.content.querySelector('.shopping-cart__item__weight');
+                let priceElement = templateShoppingCart.content.querySelector('.shopping-cart__item__price');
 
                 // считаем вес
                 totalWeight += goods[element.key].weight * element.quantity;
@@ -59,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.src = goods[element.key].path_img;
                 quantity.textContent = element.quantity;
                 btn.dataset.btnDeleteBook = element.key;
+                priceElement.textContent = `${goods[element.key].price} ₽/ шт`;
                 totalPrice.textContent = parseInt(goods[element.key].price) * element.quantity + ' ₽';
                 weight.textContent = `${goods[element.key].weight * element.quantity} грамм`;
                 let li = templateShoppingCart.content.cloneNode(true);
@@ -174,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setLocalStorage();
             getLocalStorage();
             createCartsItem();
-            countShoppingCart();
         }
 
         // функция получения и создания обработчиков событий
@@ -193,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     setLocalStorage();
                     getLocalStorage();
                     createCartsItem();
-                    countShoppingCart();
                 });
             });
 
@@ -230,8 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         // функция закрытия формы с оформлением заказа
-        function closeShoppingCartForm(event = document.querySelector('.shopping-cart__form__close2')) {
-            if (event === document.querySelector('.shopping-cart__form__close2')) {
+        function closeShoppingCartForm(event = document.querySelector('.shopping-cart__form__close')) {
+            if (event === document.querySelector('.shopping-cart__form__close')) {
                 const shoppingCartBodyForm = document.querySelector('.shopping-cart__body__form');
                 shoppingCartBodyForm.classList.add('hide');
             }

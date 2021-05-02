@@ -1,11 +1,28 @@
+<button class="btn-go-to-top"></button>
+<button class="btn-go-to-bottom"></button>
 <div class="container articles__container">
+    <h1 class="articles__title">Статьи о бхакти</h1>
     <ul class="articles__list">
+        <?php
+        for ($key = count($arrayArticles) - 1; $key > 0; $key--) { ?>
+            <li data-article-id=<?= $arrayArticles[$key]['id'] ?> data-article-src=<?= $arrayArticles[$key]['path'] ?> class="article__item">
+                <div class="article__item__img">
+                    <img src=<?= $arrayArticles[$key]['img_url'] ?> alt="">
+                </div>
+                <h2 class="article__title"><?= $arrayArticles[$key]['second_name'] ?></h2>
+                <p class="article__description"></p>
+                <p class="article__views">просмотров <?= $arrayViews[$arrayArticles[$key]['name']] ?></p>
+            </li>
+        <?php
+        }
+        ?>
+    </ul>
+    <!-- <ul class="articles__list">
         <li data-article-id="10" data-article-src="/articles/voprosy-otvety-o-tulasi-devi-iz-gazety-gaudiya-30-h-godov" class="article__item">
-            <div class="article__item__img">
-                <img src="/media/img/articles/article10.jpg" alt="">
-            </div>
+
             <h2 class="article__title">Вопросы-ответы о Туласи Деви (из газеты «Гаудия» 30-х годов)</h2>
             <p class="article__description"></p>
+            <p>просмотров</p>
         </li>
         <li data-article-id="9" data-article-src="/articles/nektarnye-poucheniya-shri-chaitani" class="article__item ">
             <div class="article__item__img">
@@ -70,5 +87,5 @@
             <h2 class="article__title">ДИКША — КАК ОНА ЕСТЬ !</h2>
             <p class="article__description"></p>
         </li>
-    </ul>
+    </ul> -->
 </div>

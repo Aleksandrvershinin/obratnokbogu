@@ -1,10 +1,11 @@
 function articlesJs() {
+    // получаем кнопку назад
+    let back = document.querySelector('.back__btn');
     // записываем параметры url  в переменную
     let srcArticle = getGet();
 
     // получаем название статьи
     let nameArticle = getName(srcArticle);
-
 
     // запускаем skroll
     srollTo(getInfoLocalStorage(nameArticle));
@@ -44,16 +45,25 @@ function articlesJs() {
     // функция запуска скрола
     function startScroll() {
         document.onscroll = () => {
-            trackScroll();
+            trackScrollArticle();
         }
     }
     startScroll();
 
     // функция получения scroll
-    function trackScroll() {
+    function trackScrollArticle() {
         let scrolled = window.pageYOffset;
         setInfoLocalStorage(scrolled);
 
+        if (back !== null) {
+            if (scrolled > 60) {
+                back.style.position = 'fixed'
+                back.style.top = '15px'
+            }
+            if (scrolled < 60) {
+                back.removeAttribute('style');
+            }
+        }
     }
 
     // функция сохранения scrolled в localStorage
@@ -64,7 +74,7 @@ function articlesJs() {
     //  функция получения элементов статей и пагинация по ним
     function getElements() {
         // получаем кнопку назад
-        let back = document.getElementById('article_back');
+        back = back = document.querySelector('.back__btn');
         // получаем элементы статей
         let articleItems = document.querySelectorAll('.article__item');
 
@@ -96,6 +106,8 @@ function articlesJs() {
     getElements();
     // функция добавления кнопки goToTop в статьях
     addGoToTop();
+    // функция добавления кнопки вверх на странице выбора статьи
+    startBtnGoToTop();
     // получаем элемент в который будем загружать страничку
     let articlesMain = document.querySelector('.articles_main');
 
@@ -108,7 +120,7 @@ function articlesJs() {
         // получаем название статьи
         nameArticle = getName(srcArticle);
         // отправляем запрос
-        let response = await fetch(`/articles/body_articles.php?path=${srcArticle}`, {
+        let response = await fetch(`/articles/include/body_articles.php?path=${srcArticle}`, {
             method: 'GET',
         });
         if (response.ok) {
@@ -123,6 +135,8 @@ function articlesJs() {
             // запускаем skroll
             srollTo(getInfoLocalStorage(nameArticle));
             startScroll();
+            // функция добавления кнопки вверх на странице выбора статьи
+            startBtnGoToTop();
         } else {
 
         }
@@ -183,4 +197,12 @@ function articlesJs() {
         }
     }
 
+    function startBtnGoToTop() {
+        // получаем url страницы
+        let url = document.location.pathname;
+        // проверяем адрес
+        if (url === '/articles/') {
+            addBtnGoToTop();
+        }
+    }
 }

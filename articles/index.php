@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/articles/articles.js"></script>
-    <script defer src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
 
     <link rel="stylesheet" href="/style/normalize.css">
     <link rel="stylesheet" href="/style/style.css">
@@ -13,11 +13,11 @@
 </head>
 
 <body id="articles">
-    <script src="../js/header.js"></script>
+    <? include $_SERVER['DOCUMENT_ROOT'] . '/php/header.php';?>
     <div class="main-and-footer">
         <main class="main articles_main">
 
-            <?php include $_SERVER['DOCUMENT_ROOT'] . '/articles/body_articles.php'; ?>
+            <?php include $_SERVER['DOCUMENT_ROOT'] . '/articles/include/body_articles.php'; ?>
 
         </main>
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.php'; ?>

@@ -9,17 +9,17 @@ foreach ($goods as $key => $value) {
             <a <? if ($value["available"]==="true" ) { ?>
                 href="<?= $value["path"]; ?>"
                 <? } ?>
-                ><img src="<?= $value["path_img"]; ?>" alt="картинка">
+                ><img class="user-select-none" src="<?= $value["path_img"]; ?>" alt="картинка">
             </a>
         </li>
         <p class="magazin-book-name"><?= $value["name"]; ?> </p>
         <? if ($value["available"] === "true") { ?>
         <p class="magazin-book-price"> <?= $value["price"]; ?> ₽</p>
-        <button data-product-key="<?= $key ?>" class="magazin-book-btn _js-magazin-book-btn btn">
+        <button data-product-key="<?= $key ?>" class="magazin-book-btn _js-magazin-book-btn btn user-select-none">
             Купить
         </button>
         <? } else { ?>
-        <button class="magazin-book-btn unavailable btn">
+        <button class="magazin-book-btn unavailable btn user-select-none">
             недоступно
         </button>
         <? } ?>

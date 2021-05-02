@@ -83,9 +83,9 @@
                 a.href = element.href;
                 a.textContent = element.name;
                 li.append(a);
-                if (index < 11) {
+                if (index < 12) {
                     ul[0].append(li);
-                } else if (index < 22 && index >= 11) {
+                } else if (index < 23 && index >= 12) {
                     ul[1].append(li);
                 } else {
                     ul[2].append(li);
@@ -270,7 +270,7 @@
 
     // отслеживаем клик
     function clickLink(page) {
-        const link = document.querySelectorAll(`.${page}-playlist-item`);
+        const link = document.querySelectorAll(`.${page}-playlist-item a`);
         link.forEach((e, i) => {
             e.addEventListener('click', (e) => {
                 e.preventDefault()

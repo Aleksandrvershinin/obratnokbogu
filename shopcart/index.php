@@ -16,10 +16,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/magazin/include/goods.php';
 </head>
 
 <body>
-    <script src="../js/header.js"></script>
+    <? include $_SERVER['DOCUMENT_ROOT'] . '/php/header.php';?>
+    <button class="btn-go-to-top"></button>
+    <button class="btn-go-to-bottom"></button>
     <div class="main-and-footer">
         <main class="main">
-            <nav class="nav magazin-second-nav">
+            <!-- <nav class="nav magazin-second-nav shop-cart">
                 <ul class="magazin-second-nav-list">
                     <li class="magazin-second-nav-item">
                         <a class="magazin-second-nav-link" href="/">Главная </a>/
@@ -31,10 +33,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/magazin/include/goods.php';
                         <a style="pointer-events: none;" class="magazin-second-nav-link">&nbsp; Корзина </a>/
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
             <div class="container shopping-cart__container">
                 <h1 class="shopping-cart__title">Корзина</h1>
-                <p class="shopping-cart__description">
+                <p class="shopping-cart__description hide">
                     Корзина пока пуста, перейдите в <a href="/magazin">магазин</a>, что бы добавить товаров в
                     корзину
                 </p>
@@ -65,7 +67,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/magazin/include/goods.php';
                         <div class="shopping-cart__item__panel_quantity"></div>
                         <button class="shopping-cart__item__panel_up"></button>
                     </div>
-                    <div class="shopping-cart__item__price">50 ₽/ шт</div>
+                    <div class="shopping-cart__item__price"></div>
                     <button class="shopping-cart__item__panel_delete">удалить</button>
                 </div>
                 <div class="shopping-cart__item__total-price"></div>
@@ -87,9 +89,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/magazin/include/goods.php';
     </template>
     <div class="shopping-cart__body__form body__form hide">
         <form class="shopping-cart__form">
-            <div class="shopping-cart__form__close form__close1"></div>
-            <div class="shopping-cart__form__close1 form__close2"></div>
-            <div class="shopping-cart__form__close2 form__close"></div>
+
+            <div class="shopping-cart__form__close form__close">
+            </div>
             <div class="shopping-cart__form__item">
                 <label class="shopping-cart__form__item_label" for="name">Имя*</label>
                 <input class="shopping-cart__form__item_input req" id="name" name="name" type="text">

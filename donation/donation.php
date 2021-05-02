@@ -1,16 +1,16 @@
 <script src="/donation/donation.js"></script>
 <div class="body__donation body__form hide">
     <div class="container__donation container">
-        <div class="shopping-cart__form__close form__close1"></div>
-        <div class="shopping-cart__form__close1 form__close2"></div>
-        <div class="donation__form__close form__close"></div>
+
+        <div class="donation__form__close form__close">
+        </div>
         <div class="donation__description">
             <p>Дорогие гости сайта, Харе Кришна!<br>Примите наши поклоны!</p>
             <p>
-                В данный момент в сайт вкладывается много труда, финансов и времени. Сейчас мы работаем над базой поиска, в которой хотим разместить книги, лекции и письма Шрилы Прабхупады. Также хотим реализовать режим чтения книг и другие полезные функций.
-                Будем рады за вашу поддержку сайта - «Обратно к Богу».
+                В данный момент в сайт вкладывается много труда, финансов и времени. Сейчас мы разрабатываем базу поиска, в которой хотим разместить книги, лекции и письма Шрилы Прабхупады. Также хотим реализовать режим чтения книг и другие полезные функций.
+                Будем рады за вашу поддержку сайта.
             </p>
-            <p> Вся слава Его Божественной Милости Шриле Прабхупаде!</p>
+            <p class="donation__description__special__p"> Вся слава Его Божественной Милости Шриле Прабхупаде!</p>
         </div>
         <form class="donation__form" method="POST" target="_blank" action="https://yoomoney.ru/quickpay/confirm.xml">
             <input type="hidden" name="receiver" value="4100116603698861">
@@ -43,7 +43,7 @@
                 <div class="donation__form__btn__sum__body is-active" data-sum-body="1008">
                     <input data-sum="1008" class="donation__form__btn__sum" type="button" value="1008 рублей">
                 </div>
-                <div class="donation__form__btn__sum__body" data-sum-body="0">
+                <div class="donation__form__btn__sum__body" data-sum-body="">
                     <input data-sum="0" class="donation__form__btn__sum" type="button" value="ввести сумму">
                 </div>
                 <div class="donation__form__item donation__form__item__sum hide">

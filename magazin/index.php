@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/jquery.js"></script>
+    <script defer src="/magazin/magazin.js"></script>
     <script src="/js/main.js"></script>
 
     <!-- <link rel="stylesheet" href="style/animate.css"> -->
@@ -14,12 +15,18 @@
 </head>
 
 <body class="magazin-js" id="magazin">
-    <script src="/js/header.js"></script>
+    <? include $_SERVER['DOCUMENT_ROOT'] . '/php/header.php';?>
+    <button class="btn-go-to-top"></button>
+    <button class="btn-go-to-bottom"></button>
+    <div class="magazin-shopping-cart">
+        <div class="magazin-shopping-cart-count"></div>
+        <a href="/shopcart"></a>
+    </div>
     <div class="main-and-footer">
         <main class="main">
             <section class="magazin-second-header">
-                <div class="magazin-second-header-container">
-                    <nav class="nav magazin-second-nav">
+                <div class="container magazin-second-header-container">
+                    <!-- <nav class="nav magazin-second-nav">
                         <ul class="magazin-second-nav-list">
                             <li class="magazin-second-nav-item">
                                 <a class="magazin-second-nav-link" href="/">Главная </a>/
@@ -28,7 +35,7 @@
                                 <a style="pointer-events: none;" class="magazin-second-nav-link">&nbsp; Магазин </a>/
                             </li>
                         </ul>
-                    </nav>
+                    </nav> -->
                     <div class="container magazin-container-logo">
                         <div class="magazin-logo">
                             <div class="magazin-logo-icon"></div>
@@ -62,7 +69,6 @@
         <? include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.php';?>
     </div>
     <script>
-        forShop();
         //< !--скрипт добвления кнопки наверх-- >
         addBtnGoToTop();
     </script>
