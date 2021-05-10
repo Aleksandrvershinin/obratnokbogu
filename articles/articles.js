@@ -1,14 +1,16 @@
 function articlesJs() {
     // получаем кнопку назад
     let back = document.querySelector('.back__btn');
+
     // записываем параметры url  в переменную
     let srcArticle = getGet();
-
+    // получаем данные о скроле
+    let articlesSkroll = getInfoLocalStorage();
     // получаем название статьи
     let nameArticle = getName(srcArticle);
 
     // запускаем skroll
-    srollTo(getInfoLocalStorage(nameArticle));
+    srollTo(nameArticle);
 
     // функция получения названия статьи
     function getName(url) {
@@ -25,23 +27,31 @@ function articlesJs() {
     }
 
     // функция получения из localStorage
-    function getInfoLocalStorage(nameArticle) {
-        let scrolled = localStorage.getItem(nameArticle);
-        if (nameArticle === 'articles') {
-            scrolled = 0;
-        } else {
-            if (scrolled === null) {
-                scrolled = 0
-            }
+    function getInfoLocalStorage() {
+        let articlesSkroll = localStorage.getItem('articlesSkroll');
+        articlesSkroll = JSON.parse(articlesSkroll);
+        if (articlesSkroll === null) {
+            articlesSkroll = new Object;
         }
-
-        return scrolled;
+        return articlesSkroll;
     }
 
     // функция скролла
-    function srollTo(scrolled) {
-        window.scrollTo({ top: scrolled });
+    function srollTo(nameArticle) {
+        // получаем данные из LocalStorage
+        let articlesSkroll = getInfoLocalStorage();
+        if (nameArticle !== 'articles') { // проверяем главную страницу со статьями
+            // записываем скрол
+            let scrolled = articlesSkroll[nameArticle];
+            if (articlesSkroll[nameArticle] === undefined) { // проверяем есть ли запись с данной страницы
+                // если нет выставляем скролл в 0
+                scrolled = 0;
+            }
+            // прокручиваем страницу
+            window.scrollTo({ top: scrolled });
+        }
     }
+
     // функция запуска скрола
     function startScroll() {
         document.onscroll = () => {
@@ -52,23 +62,31 @@ function articlesJs() {
 
     // функция получения scroll
     function trackScrollArticle() {
+        // получаем кнопку поделиться
+        let shareBtn = document.querySelector('.article_share');
         let scrolled = window.pageYOffset;
-        setInfoLocalStorage(scrolled);
-
-        if (back !== null) {
-            if (scrolled > 60) {
-                back.style.position = 'fixed'
-                back.style.top = '15px'
-            }
-            if (scrolled < 60) {
-                back.removeAttribute('style');
-            }
-        }
+        setInfoLocalStorage(scrolled, nameArticle);
+        changeParamBtn(back, scrolled);
+        changeParamBtn(shareBtn, scrolled);
     }
 
+    // функция изменения положения кнопок
+    function changeParamBtn(elem, scrolled) {
+        if (elem !== null) {
+            if (scrolled > 60) {
+                elem.style.position = 'fixed'
+                elem.style.top = '15px'
+            }
+            if (scrolled < 60) {
+                elem.removeAttribute('style');
+            }
+        }
+
+    }
     // функция сохранения scrolled в localStorage
-    function setInfoLocalStorage(scrolled) {
-        localStorage.setItem(nameArticle, scrolled);
+    function setInfoLocalStorage(scrolled, nameArticle) {
+        articlesSkroll[nameArticle] = scrolled;
+        localStorage.setItem('articlesSkroll', JSON.stringify(articlesSkroll));
     }
 
     //  функция получения элементов статей и пагинация по ним
@@ -133,10 +151,12 @@ function articlesJs() {
             // функция добавления кнопки goToTop в статьях
             addGoToTop();
             // запускаем skroll
-            srollTo(getInfoLocalStorage(nameArticle));
+            srollTo(nameArticle);
             startScroll();
             // функция добавления кнопки вверх на странице выбора статьи
             startBtnGoToTop();
+            // инцилизации скрипта поделиться
+            initShare();
         } else {
 
         }
@@ -204,5 +224,18 @@ function articlesJs() {
         if (url === '/articles/') {
             addBtnGoToTop();
         }
+    }
+
+
+
+    // функция инцилизации скрипта поделиться
+    function initShare() {
+        let scriptShare = document.querySelector('.script-share');
+        scriptShare.remove();
+        scriptShare = document.createElement('script');
+        scriptShare.classList.add('script-share');
+        scriptShare.src = "/js/share_social_media.js";
+        scriptShare.async = true;
+        document.getElementsByTagName('head')[0].appendChild(scriptShare);
     }
 }

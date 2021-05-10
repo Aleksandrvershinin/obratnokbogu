@@ -11,40 +11,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/php/functions.php';
             <img class="header-logo-img" src="/media/img/logo.jpg" alt="">
             <a href="/" class="header-logo-link"></a>
         </div>
-        <nav class="header-nav">
-            <ul class="header-nav-lists">
-                <?php
-                foreach ($menu as $key => $value) {
-                ?>
-                    <li class="header-nav-item <? if (isCurrentUrl($value['path'])) echo 'is-active'; ?>">
-                        <a href="<?= $value['path']; ?>"><?= $value['title']; ?></a>
-                    </li>
-                <?php
-                }
-                ?>
-                <!-- <li class="header-nav-item">
-                    <a href="/audio">аудио</a>
-                </li>
-                <li class="header-nav-item">
-                    <a href="/video">видео</a>
-                </li>
-                <li class="header-nav-item">
-                    <a href="/photo">фото</a>
-                </li>
-                <li class="header-nav-item">
-                    <a href="/magazin">магазин</a>
-                </li>
-                <li class="header-nav-item">
-                    <a href="/articles">статьи</a>
-                </li>
-                <li class="header-nav-item">
-                    <a href="/files">файлы</a>
-                </li>
-                <li class="header-nav-item">
-                    <a href="#">база поиска</a>
-                </li> -->
-            </ul>
-        </nav>
+        <!-- выводим меню -->
+        <?php writeMenu($menu); ?>
         <button class="header-night-btn"></button>
         <div class="header-radio">
             <div class="box-header-radio">

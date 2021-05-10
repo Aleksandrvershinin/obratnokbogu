@@ -57,6 +57,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/articles/articles/for_all_articles.php";
             </b>
         </p>
 
-
+        <p>Составитель статьи: Сиддхи Лаласа дас</p>
     </div>
 </div>

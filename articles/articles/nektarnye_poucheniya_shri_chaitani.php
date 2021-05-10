@@ -97,6 +97,6 @@ include $_SERVER['DOCUMENT_ROOT'] . "/articles/articles/for_all_articles.php";
         </p>
 
 
-
+        <p>Составитель статьи: Павака дас</p>
     </div>
 </div>

@@ -57,7 +57,7 @@
                         Обратно к Богу
                      </h1>
                      <div class="first-container-block2-img first-container-block-img user-select-none">
-                        <a href="/shrila_prabhupada"><img src="media/img/prabhupada.jpg" title="Биография Шрилы Прабхупады" alt="prabhupada"></a>
+                        <img src="media/img/prabhupada.jpg" alt="prabhupada">
                      </div>
 
                      <button class="btn first-container-block2-btn first-container-block-btn user-select-none">
@@ -121,27 +121,27 @@
                   ясными комментариями, «поразили литературное и научное сообщество во всем мире».</p>
                <ul class="books-container-list">
                   <li class="books-container-item">
-                     <a href="/magazin/za_predelami_rozgdeniya_i_smerti"> <img class="user-select-none" src="media/img/book_za_predelami_rozgdeniya_i_smerti.jpg" alt=""></a>
-                     <p class="magazin-book-name">За пределами <br> рождения и смерти<br>50 ₽</p>
+                     <a target="_blank" href="https://vedabase.io/ru/library/bg/"> <img class="user-select-none" src="/media/img/book_bhagavad-gita_kak_ona_est.jpg" alt=""></a>
+                     <p class="book-name">Бхагавад-гита как она есть</p>
                   </li>
                   <li class="books-container-item">
-                     <a href="/magazin/sovershenstvo_yogi">
-                        <img class="user-select-none" src="media/img/book_sovershenstvo_iogi.jpg" alt=""></a>
-                     <p class="magazin-book-name">Совершенство<br>йоги<br>50 ₽</p>
+                     <a target="_blank" href="https://vedabase.io/ru/library/sb/">
+                        <img class="user-select-none" src="media/img/book_shrimad-bhagavatam.jpg" alt=""></a>
+                     <p class="book-name">Шримад-Бхагаватам</p>
                   </li>
                   <li class="books-container-item">
-                     <a href="/magazin/sovershennyye_voprosy_sovershennyye_otvety"><img class="user-select-none" src="media/img/book_sovershenie_voprosi.jpg" alt=""></a>
-                     <p class="magazin-book-name">Совершенные вопросы,<br>совершенные ответы<br>100 ₽</p>
+                     <a target="_blank" href="https://vedabase.io/ru/library/cc/"><img class="user-select-none" src="media/img/book_chajtanja-charitamrita.png" alt=""></a>
+                     <p class="book-name">Чайтанья-чаритамрита</p>
                   </li>
                   <li class="books-container-item">
-                     <a>
-                        <img class="user-select-none" src="media/img/book_nektar_nastavlenii.jpg" alt=""></a>
-                     <p class="magazin-book-name">Нектар<br>наставлений</p>
+                     <a target="_blank" href="https://vedabase.io/ru/library/iso/">
+                        <img class="user-select-none" src="media/img/book_shri_ishopanishad.jpg" alt=""></a>
+                     <p class="book-name">Шри Ишопанишад</p>
                   </li>
                   <li class="books-container-item">
-                     <a>
-                        <img class="user-select-none" src="media/img/book_legkoe_puteshestvie_na_drugie_planeti.jpg" alt=""></a>
-                     <p class="magazin-book-name">Легкое путешествие<br>на другие планеты</p>
+                     <a target="_blank" href="https://vedabase.io/ru/library/noi/">
+                        <img class="user-select-none" src="media/img/book_nektar_nastavlenij.jpg" alt=""></a>
+                     <p class="book-name">Нектар наставлений</p>
                   </li>
                </ul>
             </div>

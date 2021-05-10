@@ -25,12 +25,12 @@ $menu = [
         'url' => '/photo/',
         'sort' => 4,
     ],
-    [
-        'title' => 'магазин',
-        'path' => '/magazin/',
-        'url' => '/magazin/',
-        'sort' => 5,
-    ],
+    // [
+    //     'title' => 'магазин',
+    //     'path' => '/magazin/',
+    //     'url' => '/magazin/',
+    //     'sort' => 5,
+    // ],
     [
         'title' => 'статьи',
         'path' => '/articles/',
@@ -43,10 +43,16 @@ $menu = [
         'url' => '/files/',
         'sort' => 7,
     ],
+    // [
+    //     'title' => 'база поиска',
+    //     'path' => '#',
+    //     'url' => '/search_database/',
+    //     'sort' => 8,
+    // ],
     [
-        'title' => 'база поиска',
+        'title' => 'истинный гуру',
         'path' => '#',
         'url' => '/search_database/',
-        'sort' => 8,
+        'sort' => 9,
     ],
 ];

@@ -8,7 +8,7 @@ export function drowPlaylists(currentIdPlaylist) {
             li.classList.add('audio-playlists-item');
             playlistsList.append(li);
             li.textContent = e.name
-            if (i <= 19) {
+            if (i <= 17) {
                 li.dataset.categoryId = "1";
             } else {
                 li.classList.add('hide');
@@ -28,7 +28,6 @@ export function drowPlaylists(currentIdPlaylist) {
             changeCategory(element);
         });
     });
-
     // меняем категорию
     function changeCategory(element) {
 
@@ -46,8 +45,8 @@ export function drowPlaylists(currentIdPlaylist) {
             element.classList.remove('hide');
         });
     }
-    // провермяем какую категорию показать
-    if (currentIdPlaylist > 19) {
+    // проверяем какую категорию показать
+    if (currentIdPlaylist > 17) {
         changeCategory(category[1]);
     }
 }
@@ -78,7 +77,6 @@ export function markerPlaylist(idTrack, lookforTrack) {
     function workClass() {
         // убираем у плейлиста класс
         if (playlistMarker !== null) {
-            console.log(playlistMarker);
             playlistMarker.classList.remove('point');
         }
         // добавляем плейлисту в котором найден трек класс

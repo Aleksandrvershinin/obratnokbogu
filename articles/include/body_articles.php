@@ -10,10 +10,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/articles/include/array_articles.php';
 
 // подключаем файл с функцией поиска
 include_once $_SERVER['DOCUMENT_ROOT'] . '/php/functions.php';
-
+// получаем текущий host
+$host = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
 // получаем текущий url
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-// //  очишаем от HTML тегов
+//   очишаем от HTML тегов
 $url =  htmlspecialchars($url);
 // проверяем существует ли GET запрос
 if (isset($_GET["path"]) && $_GET["path"] !== '') {
@@ -26,25 +27,29 @@ if (isset($_GET["path"]) && $_GET["path"] !== '') {
     //  ишем статью из URL
     $key = searchArticle($url, $arrayArticles);
 }
-if ($key !== false) {
-
-    // проверяем главная ли страница
-    if ($key !== 0) {
-        // функция счетчика просмотров
-        checkIp($arrayArticles[$key]['name']);
-    }
-
-    // массив с просмотрами
-    $arrayViews = getArrayViews();
-
-    // подключаем нужную статью
-    include $_SERVER['DOCUMENT_ROOT'] . $arrayArticles[$key]['url'];
-} else {
-    // подключаем страницу с ошибкой в случае неудачи поиска
-    include $_SERVER['DOCUMENT_ROOT'] . "/php/not_found.php";
-}
 ?>
+<section>
+    <?
+    if ($key !== false) {
+
+        // проверяем главная ли страница
+        if ($key !== 0) {
+            // функция счетчика просмотров
+            checkIp($arrayArticles[$key]['name']);
+        }
+
+        // массив с просмотрами
+        $arrayViews = getArrayViews();
+
+        // подключаем нужную статью
+        include $_SERVER['DOCUMENT_ROOT'] . $arrayArticles[$key]['url'];
+    } else {
+        // подключаем страницу с ошибкой в случае неудачи поиска
+        include $_SERVER['DOCUMENT_ROOT'] . "/php/not_found.php";
+    }
+    ?>
 </section>
+
 <script>
     //    функция передачи get параметров в JS
     function getGet() {

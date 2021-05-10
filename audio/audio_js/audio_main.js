@@ -79,18 +79,24 @@ let currentIndexTrack;
 // записываем в переменную текущий id трека
 let currentIdTrack;
 // переменная с id текущего плейлиста
-let currentIdPlaylist
+let currentIdPlaylist;
+// переменная с временем
+let timeTrack;
 // отслеживаем активно ли перемешивание плей листа
 let mix = false
 //получаем данные из localStorage
 let safeInfo = localStorage.getItem('safeInfoTrack');
-localStorage.removeItem('safeInfoPlaylist');
-localStorage.removeItem('book');
 if (safeInfo == null) {
     currentIdTrack = 1;
+    timeTrack = 0;
 } else {
     safeInfo = JSON.parse(safeInfo);
-    currentIdTrack = safeInfo;
+    currentIdTrack = safeInfo['idTrack'];
+    timeTrack = safeInfo['time'];
+    if (currentIdTrack === undefined) {
+        currentIdTrack = 1;
+        timeTrack = 0;
+    }
 };
 
 
@@ -159,8 +165,8 @@ mixButton.addEventListener('click', () => {
 });
 // получаем время трека
 audioPlayer.onloadedmetadata = function () {
-    durationTime.innerHTML = audioTime(this.duration)
-};
+    durationTime.innerHTML = audioTime(this.duration);
+}
 // устанавливаем градиент для времени
 progressBar.style.background = `-webkit-linear-gradient(left, rgb(38, 111, 170) 0%, rgb(38, 111, 170) ${progressBar.value}%, #000 ${progressBar.value}%, #000 100%)`;
 // устанавливаем градиент для звука
@@ -240,7 +246,10 @@ function playNextTrack() {
 
 //Отображение времени
 
-audioPlayer.addEventListener("timeupdate", audioProgress);
+audioPlayer.addEventListener("timeupdate", () => {
+    audioProgress();
+    saveInfo();
+});
 
 //Перемотка
 
@@ -285,8 +294,7 @@ window.addEventListener('keydown', (e) => {
         }
     }
 });
-// загружаем плейлисты
-drowPlaylists(currentIdPlaylist);
+
 // загружаем страничку
 loadPage();
 
@@ -774,6 +782,8 @@ function loadPage() {
     }
     // id текущего плей листа
     currentIdPlaylist = result['idPlaylist'];
+    // загружаем плейлисты
+    drowPlaylists(currentIdPlaylist);
     // заполняем список треков
     filingPlaylist(result['playlist']);
     // устанавливаем трек
@@ -786,18 +796,28 @@ function loadPage() {
     setPlaylist(currentPlaylist);
     // устанавливаем трек в плеер
     setTrack(lookforIndexTrack());
+    // учтанавливаем время начала воспроизведения
+    audioPlayer.currentTime = timeTrack;
     // проверяем плей
     if (checkPlay) {
         audioAct();
     }
 }
-
+// функция сохранения информации в localStorage
+function saveInfo() {
+    let safeInfoTrack = {
+        'idTrack': currentIdTrack,
+        'time': audioPlayer.currentTime,
+    }
+    localStorage.setItem('safeInfoTrack', JSON.stringify(safeInfoTrack));
+}
 function audioAct() { //Запускаем или ставим на паузу
     if (audioPlayer.src) {
         if (audioPlayer.paused) {
             audioPlayer.play();
             currentIdTrack = currentPlaylistIsActive[currentIndexTrack].id
-            localStorage.setItem('safeInfoTrack', JSON.stringify(currentIdTrack));
+            // сохраняем информацию в localStorage
+            saveInfo();
             changeButton(searchTrackInPlaylist(currentPlaylist));
             // функция отметки плейлиста
             markerPlaylist(currentIdTrack, lookforTrack);
@@ -889,7 +909,6 @@ function audioChangeVolume() { //Меняем громкость
     }
 
 }
-
 function audioMute() { //Убираем звук
     if (audioPlayer.volume == 0) {
         audioPlayer.volume = volumeScale.value / 100;

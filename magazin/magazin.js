@@ -34,6 +34,15 @@
             goodsInShoppingCart = [];
         } else {
             goodsInShoppingCart = JSON.parse(goodsInShoppingCart);
+            goodsInShoppingCart.forEach((element, index) => {
+                if (element.key > 2) {
+                    goodsInShoppingCart.splice(index, 1);
+                    // localStorage.setItem('goodsInShoppingCart', JSON.stringify(goodsInShoppingCart));
+                    // getLocalStorage();
+                    // return
+                    console.log(goodsInShoppingCart);
+                }
+            });
         }
         return goodsInShoppingCart;
     }

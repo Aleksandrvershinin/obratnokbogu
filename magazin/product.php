@@ -32,7 +32,7 @@ $product = $goods[$key];
     <!-- <link rel="stylesheet" href="style/animate.css"> -->
     <link rel="stylesheet" href="/style/normalize.css">
     <link rel="stylesheet" href="/style/style.css">
-    <title><?= $product["name"] ?></title>
+    <title><?= $product["name"]; ?></title>
 </head>
 
 <body class="magazin-js" id="si">
@@ -93,7 +93,7 @@ $product = $goods[$key];
                                     Доступно
                                 </div>
                                 <div class="book-icon"></div>
-                                <div class="book-price"><?= $product["price"] ?> ₽</div>
+                                <div class="book-price"><?= $product["price"]; ?> ₽</div>
                                 <button data-product-key="<?= $key ?>" class="book-buy-btn _js-magazin-book-btn btn">
                                     Купить
                                 </button>

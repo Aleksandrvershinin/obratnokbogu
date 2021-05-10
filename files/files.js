@@ -13,11 +13,14 @@
     const getEnDescription = document.querySelector('.get-en-description');
 
     // отслеживаем клик по кнопке
-    getEnBtn.addEventListener('click', () => {
-        // отбираем или добавляем class элементам
-        getEnBoxDescription.classList.toggle('no-hide');
-        getEnDescription.classList.toggle('no-hide');
-    });
+    if (getEnBtn !== null) {
+        getEnBtn.addEventListener('click', () => {
+            // отбираем или добавляем class элементам
+            getEnBoxDescription.classList.toggle('no-hide');
+            getEnDescription.classList.toggle('no-hide');
+        });
+    }
+
 
 
 
@@ -56,11 +59,11 @@
     }
 
 
-    // отслеживаем клик по кнопке тематические подборки цитат
-    quotesJs.addEventListener('click', () => {
-        // показываем или скрываем блок с цитатми
-        showElement(quotesContainerBox);
-    });
+    // // отслеживаем клик по кнопке тематические подборки цитат
+    // quotesJs.addEventListener('click', () => {
+    //     // показываем или скрываем блок с цитатми
+    //     showElement(quotesContainerBox);
+    // });
 
     // вешаем обработчик на "click" на заголовки цитат
     titles.forEach((element, index) => {
@@ -76,57 +79,53 @@
 
 
 
-
-
     // заполняем страницу файлами
-
-
     // получаем массив с файлами
-    async function getArray() {
-        let response = await fetch('../php/get-pdf-files.php', {
-            method: 'POST',
-        });
-        let result = await response.json();
-        newResult = [];
-        result.sort((a, b) => a.match(/^\d+/) - b.match(/^\d+/));
-        result.forEach(element => {
-            nameFile = element.replace(/^\d*\)/, "");
-            let object = {
-                name: nameFile,
-                link: element,
-            }
-            newResult.push(object);
-        });
-        createList(newResult);
-    }
+    // async function getArray() {
+    //     let response = await fetch('../php/get-pdf-files.php', {
+    //         method: 'POST',
+    //     });
+    //     let result = await response.json();
+    //     newResult = [];
+    //     result.sort((a, b) => a.match(/^\d+/) - b.match(/^\d+/));
+    //     result.forEach(element => {
+    //         nameFile = element.replace(/^\d*\)/, "");
+    //         let object = {
+    //             name: nameFile,
+    //             link: element,
+    //         }
+    //         newResult.push(object);
+    //     });
+    //     createList(newResult);
+    // }
 
-    // заполняем список
-    function createList(array) {
-        // получаем template
-        let filesTemplate = document.getElementById('files__template');
+    // // заполняем список
+    // function createList(array) {
+    //     // получаем template
+    //     let filesTemplate = document.getElementById('files__template');
 
-        // получаем ul в которорый будем загружать файлы
-        let ul = document.querySelector('.files__list');
+    //     // получаем ul в которорый будем загружать файлы
+    //     let ul = document.querySelector('.files__list');
 
-        // получаем элементы для загрузки информации
-        let li = filesTemplate.content.querySelector('.files__item');
-        let link = filesTemplate.content.querySelector('.files__item_link');
+    //     // получаем элементы для загрузки информации
+    //     let li = filesTemplate.content.querySelector('.files__item');
+    //     let link = filesTemplate.content.querySelector('.files__item_link');
 
-        // перебираем массив и заполняем список
-        array.forEach(element => {
-            // link.download = `/media/files/${element}`;
-            link.href = `/media/files/${element.link}`;
-            link.textContent = element.name;
-            ul.append(li.cloneNode(true));
-        });
-        let lii = document.querySelectorAll('.files__item');
-        lii.forEach((element, index) => {
-            element.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.open(`https://docs.google.com/viewer?url=https://obratnokbogu.ru/media/files/${array[index].link.replace(/\s/gi, '+')}`);
-            })
-        })
+    //     // перебираем массив и заполняем список
+    //     array.forEach(element => {
+    //         // link.download = `/media/files/${element}`;
+    //         link.href = `/media/files/${element.link}`;
+    //         link.textContent = element.name;
+    //         ul.append(li.cloneNode(true));
+    //     });
+    //     let lii = document.querySelectorAll('.files__item');
+    //     lii.forEach((element, index) => {
+    //         element.addEventListener('click', (e) => {
+    //             e.preventDefault();
+    //             window.open(`https://docs.google.com/viewer?url=https://obratnokbogu.ru/media/files/${array[index].link.replace(/\s/gi, '+')}`);
+    //         })
+    //     })
 
-    }
-    // getArray()
+    // }
+    // // getArray()
 })();

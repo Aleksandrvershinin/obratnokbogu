@@ -59,34 +59,34 @@ document.addEventListener('DOMContentLoaded', () => {
             // создаем итерацию по всему массиву с ключами товаров
             goodsInShoppingCart.forEach(element => {
 
-                // получаем элементы в которые будем загружать информацию о товаре
-                let name = templateShoppingCart.content.querySelector('.shopping-cart__item__name');
-                let href = templateShoppingCart.content.querySelector('.shopping-cart__item__href');
-                let img = templateShoppingCart.content.querySelector('.shopping-cart__item__img');
-                let quantity = templateShoppingCart.content.querySelector('.shopping-cart__item__panel_quantity');
-                let btn = templateShoppingCart.content.querySelector('.shopping-cart__item__panel_delete');
-                let totalPrice = templateShoppingCart.content.querySelector('.shopping-cart__item__total-price');
-                let weight = templateShoppingCart.content.querySelector('.shopping-cart__item__weight');
-                let priceElement = templateShoppingCart.content.querySelector('.shopping-cart__item__price');
+                if (goods[element.key] !== undefined) {
+                    // получаем элементы в которые будем загружать информацию о товаре
+                    let name = templateShoppingCart.content.querySelector('.shopping-cart__item__name');
+                    let href = templateShoppingCart.content.querySelector('.shopping-cart__item__href');
+                    let img = templateShoppingCart.content.querySelector('.shopping-cart__item__img');
+                    let quantity = templateShoppingCart.content.querySelector('.shopping-cart__item__panel_quantity');
+                    let btn = templateShoppingCart.content.querySelector('.shopping-cart__item__panel_delete');
+                    let totalPrice = templateShoppingCart.content.querySelector('.shopping-cart__item__total-price');
+                    let weight = templateShoppingCart.content.querySelector('.shopping-cart__item__weight');
+                    let priceElement = templateShoppingCart.content.querySelector('.shopping-cart__item__price');
 
-                // считаем вес
-                totalWeight += goods[element.key].weight * element.quantity;
+                    // считаем вес
+                    totalWeight += goods[element.key].weight * element.quantity;
 
-                // Заполняем карточку
-                name.textContent = goods[element.key].name;
-                href.href = goods[element.key].path;
-                img.src = goods[element.key].path_img;
-                quantity.textContent = element.quantity;
-                btn.dataset.btnDeleteBook = element.key;
-                priceElement.textContent = `${goods[element.key].price} ₽/ шт`;
-                totalPrice.textContent = parseInt(goods[element.key].price) * element.quantity + ' ₽';
-                weight.textContent = `${goods[element.key].weight * element.quantity} грамм`;
-                let li = templateShoppingCart.content.cloneNode(true);
-                ul.append(li)
-                totalGoods = totalGoods + element.quantity;
-                totalSum = totalSum + parseInt(goods[element.key].price) * element.quantity;
-
-
+                    // Заполняем карточку
+                    name.textContent = goods[element.key].name;
+                    href.href = goods[element.key].path;
+                    img.src = goods[element.key].path_img;
+                    quantity.textContent = element.quantity;
+                    btn.dataset.btnDeleteBook = element.key;
+                    priceElement.textContent = `${goods[element.key].price} ₽/ шт`;
+                    totalPrice.textContent = parseInt(goods[element.key].price) * element.quantity + ' ₽';
+                    weight.textContent = `${goods[element.key].weight * element.quantity} грамм`;
+                    let li = templateShoppingCart.content.cloneNode(true);
+                    ul.append(li)
+                    totalGoods = totalGoods + element.quantity;
+                    totalSum = totalSum + parseInt(goods[element.key].price) * element.quantity;
+                }
             });
             // Получаем элемент header panel
             let shoppingCartHederPanel = document.querySelectorAll('.shopping-cart__row__header-panel');
