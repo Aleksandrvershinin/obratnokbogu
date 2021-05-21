@@ -1,11 +1,11 @@
-
 // фукция добавления кнопки вверх и вниз
 function addBtnGoToTop() {
     let btnBottom = document.querySelector('.btn-go-to-bottom');
     let btnTop = document.querySelector('.btn-go-to-top');
 
-    window.addEventListener('scroll', trackScroll,
-        { passive: true });
+    window.addEventListener('scroll', trackScroll, {
+        passive: true
+    });
 
     // обработка события 'click' для скролла
     btnTop.addEventListener('click', () => {
@@ -13,6 +13,7 @@ function addBtnGoToTop() {
         goTo(0);
     });
 
+    trackScroll();
 
     function trackScroll() {
         let scrolled = window.pageYOffset;
@@ -26,7 +27,9 @@ function addBtnGoToTop() {
     }
     // функция скролла наверх
     function goTo(scroll) {
-        window.scrollTo({ top: scroll, });
+        window.scrollTo({
+            top: scroll,
+        });
     }
     // функция получения текущего скрола
     function getScrolled() {
@@ -44,4 +47,3 @@ function addBtnGoToTop() {
         });
     }
 }
-

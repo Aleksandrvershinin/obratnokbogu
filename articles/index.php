@@ -11,8 +11,14 @@
     <script src="/articles/articles.js"></script>
     <script src="/js/main.js"></script>
 
+
     <link rel="stylesheet" href="/style/normalize.css">
     <link rel="stylesheet" href="/style/style.css">
+
+    <!-- скрипт и стили для переключения ночной темы -->
+    <link rel="stylesheet" href="/style/light_style.css" class="style__theme">
+    <script defer src="/js/switch_theme.js"></script>
+
     <title>Статьи</title>
 </head>
 

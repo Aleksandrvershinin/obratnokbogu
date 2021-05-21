@@ -118,7 +118,7 @@ $arrayArticles = [
     [
         "path" => "/articles/kto_eto_ramo",
         "name" => "kto_eto_ramo",
-        "second_name" => "Кто это, РамО ?",
+        "second_name" => "«Кто это, РамО ?»",
         "url" => "/articles/articles/kto_eto_ramo.php",
         "img_url" => "/media/img/articles/article13.jpg",
         "views" => $arrayViews["kto_eto_ramo"],

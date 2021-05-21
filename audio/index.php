@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta property="og:image" content="https://obratnokbogu.ru/media/audio_meta.jpg">
-    <!-- <script defer src="/audio/audio.js"></script> -->
+
     <?php
     include $_SERVER['DOCUMENT_ROOT'] . "/audio/process_url.php";
     ?>
@@ -21,12 +21,13 @@
 
     <script src="/audio/audio_js/playlists.js"></script>
     <script type="module" src="/audio/audio_js/audio_main.js"></script>
-    <!-- <script async src="/audio/marquee.js"></script> -->
-
-
-
 
     <link rel="stylesheet" href="/style/style.css">
+
+    <!-- скрипт и стили для переключения ночной темы -->
+    <link rel="stylesheet" href="/style/light_style.css" class="style__theme">
+    <script async src="/js/switch_theme.js"></script>
+
     <title>аудио лекции</title>
 </head>
 
@@ -49,10 +50,18 @@
                             <ul class="audio-playlists-list"></ul>
 
                         </div>
-                        <form class="audio-playlists-form-search" onclick="event.preventDefault()">
-                            <input placeholder="Поиск" class="audio-playlists-form-input" type="text">
-                            <button type="submit" class="audio-playlists-form-btn"></button>
-                        </form>
+                        <div class="audio-playlists-row">
+                            <form class="audio-playlists-form-search" onclick="event.preventDefault()">
+                                <input placeholder="Поиск" class="audio-playlists-form-input" type="text">
+                                <button type="submit" class="audio-playlists-form-btn"></button>
+                            </form>
+                            <button class="audio__switch__theme__btn switch__theme__btn">
+                                <div class="audio__switch__theme__btn__img">
+                                    <?php include $_SERVER['DOCUMENT_ROOT'] . '/media/img/icon_btn_dark_mode.php' ?>
+                                </div>
+                            </button>
+                        </div>
+
                         <h2 id="category2" data-category-id="2" data-category-name="ФРАГМЕНТЫ ЛЕКЦИЙ" class="audio-playlists-title">
                             ФРАГМЕНТЫ ЛЕКЦИЙ
                         </h2>

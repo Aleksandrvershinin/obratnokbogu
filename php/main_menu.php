@@ -38,21 +38,33 @@ $menu = [
         'sort' => 6,
     ],
     [
+        'title' => 'цитаты',
+        'path' => '/quotes/',
+        'url' => '/quotes/',
+        'sort' => 7,
+    ],
+    [
+        'title' => 'молитвы',
+        'path' => '/prayers/',
+        'url' => '/prayers/',
+        'sort' => 8,
+    ],
+    [
         'title' => 'файлы',
         'path' => '/files/',
         'url' => '/files/',
-        'sort' => 7,
+        'sort' => 9,
     ],
     // [
     //     'title' => 'база поиска',
     //     'path' => '#',
     //     'url' => '/search_database/',
-    //     'sort' => 8,
+    //     'sort' => 9,
     // ],
-    [
-        'title' => 'истинный гуру',
-        'path' => '#',
-        'url' => '/search_database/',
-        'sort' => 9,
-    ],
+    // [
+    //     'title' => 'истинный гуру',
+    //     'path' => '#',
+    //     'url' => '/search_database/',
+    //     'sort' => 10,
+    // ],
 ];

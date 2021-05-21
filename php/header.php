@@ -13,7 +13,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/php/functions.php';
         </div>
         <!-- выводим меню -->
         <?php writeMenu($menu); ?>
-        <button class="header-night-btn"></button>
+        <!-- <button class="header-night-btn"></button> -->
+        <div class="header-line"></div>
         <div class="header-radio">
             <div class="box-header-radio">
                 <div class="body-icon-play-header-radio">

@@ -1,6 +1,15 @@
-import { startMarquee } from '/audio/audio_js/marquee.js';
-import { scroll } from '/audio/audio_js/scroll.js';
-import { drowPlaylists, markerPlaylist } from '/audio/audio_js/drowPlaylists.js';
+import {
+    startMarquee
+} from '/audio/audio_js/marquee.js';
+import {
+    scroll
+} from '/audio/audio_js/scroll.js';
+import {
+    drowPlaylists,
+    markerPlaylist
+} from '/audio/audio_js/drowPlaylists.js';
+
+
 // функция добавления к каждому плейлисту id
 addIdToAllPlaylist();
 // функция добавления к каждому треку уникального id
@@ -84,7 +93,7 @@ let currentIdPlaylist;
 let timeTrack;
 // отслеживаем активно ли перемешивание плей листа
 let mix = false
-//получаем данные из localStorage
+    //получаем данные из localStorage
 let safeInfo = localStorage.getItem('safeInfoTrack');
 if (safeInfo == null) {
     currentIdTrack = 1;
@@ -164,10 +173,10 @@ mixButton.addEventListener('click', () => {
     mixArray();
 });
 // получаем время трека
-audioPlayer.onloadedmetadata = function () {
-    durationTime.innerHTML = audioTime(this.duration);
-}
-// устанавливаем градиент для времени
+audioPlayer.onloadedmetadata = function() {
+        durationTime.innerHTML = audioTime(this.duration);
+    }
+    // устанавливаем градиент для времени
 progressBar.style.background = `-webkit-linear-gradient(left, rgb(38, 111, 170) 0%, rgb(38, 111, 170) ${progressBar.value}%, #000 ${progressBar.value}%, #000 100%)`;
 // устанавливаем градиент для звука
 volumeScale.style.background = `-webkit-linear-gradient(left, #fff 0%, #fff ${volumeScale.value}%, rgb(100, 100, 100) ${volumeScale.value}%, rgb(100, 100, 100) 100%)`;
@@ -467,18 +476,19 @@ function filterArray(array) {
     });
     return newArray;
 }
+
 // функция поиска треков
 function searchTracks() {
     let stringSearch = formInputSearch.value.toLowerCase().trim();
     let findedTracks = [];
     playLists.map(element => {
         element.tracks.map(el => {
-            if (el.name.toLowerCase().trim().search(stringSearch) !== -1 && stringSearch != '') {
-                findedTracks.push(el)
+            if (el.name.toLowerCase().trim().indexOf(stringSearch) !== -1) {
+                findedTracks.push(el);
             }
-        })
-    })
-    let newfindedTracks = filterArray(findedTracks)
+        });
+    });
+    let newfindedTracks = filterArray(findedTracks);
     return newfindedTracks;
 }
 // запускаем поиск
@@ -487,7 +497,6 @@ function startSearch() {
         filingPlaylist(searchTracks(), formInputSearch.value.toLowerCase().trim());
         audioPlaylists.forEach(e => {
             e.classList.remove('audio-item-is-active');
-            formInputSearch.value = '';
         });
     }
 }
@@ -507,7 +516,7 @@ function filingPlaylist(namePlaylist, stringSearch = false) {
         // проверяем активен ли поиск
         if (stringSearch) {
             // записываем индекс начала вхождения
-            let start = e.name.toLowerCase().trim().search(stringSearch);
+            let start = e.name.toLowerCase().trim().indexOf(stringSearch);
             // записываем длинну строки
             let length = stringSearch.length;
             // отмечаем подстроки
@@ -811,12 +820,13 @@ function saveInfo() {
     }
     localStorage.setItem('safeInfoTrack', JSON.stringify(safeInfoTrack));
 }
+
 function audioAct() { //Запускаем или ставим на паузу
     if (audioPlayer.src) {
         if (audioPlayer.paused) {
             audioPlayer.play();
             currentIdTrack = currentPlaylistIsActive[currentIndexTrack].id
-            // сохраняем информацию в localStorage
+                // сохраняем информацию в localStorage
             saveInfo();
             changeButton(searchTrackInPlaylist(currentPlaylist));
             // функция отметки плейлиста
@@ -909,6 +919,7 @@ function audioChangeVolume() { //Меняем громкость
     }
 
 }
+
 function audioMute() { //Убираем звук
     if (audioPlayer.volume == 0) {
         audioPlayer.volume = volumeScale.value / 100;

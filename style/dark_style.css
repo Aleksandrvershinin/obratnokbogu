@@ -1,0 +1,68 @@
+.main-and-footer {
+    color: white;
+    background: rgba(0 0 0 / 90%);
+}
+
+.audio-playlists-title.first {
+    color: white;
+}
+
+.audio-playlists-title.first#category2 {
+    border-bottom: 1px solid white;
+}
+
+.audio-playlists-title.first .item-line {
+    background: #fff;
+}
+
+.audio-playlists-row .audio__switch__theme__btn svg g path {
+    fill: #fff;
+}
+
+.audio-playlist__body {
+    border: 1px solid white;
+}
+
+.audio-playlist-item-play {
+    border-color: transparent transparent transparent white;
+}
+
+.audio-playlist-item-download::before {
+    background-color: white;
+}
+
+.audio-playlist-item-download {
+    border-bottom: 1px solid white;
+}
+
+.audio-playlist-item-download::after {
+    border-bottom: 2px solid white;
+    border-left: 2px solid white;
+}
+
+.ya-share2__item_more.ya-share2__item_has-pretty-view .ya-share2__icon_more {
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14.6 2.9a2.7 2.7 0 01-4.554 1.963L5.303 7.28a2.702 2.702 0 010 1.44l4.743 2.417a2.7 2.7 0 11-.834 1.708l-5.05-2.575a2.7 2.7 0 110-4.54l5.05-2.575A2.7 2.7 0 1114.6 2.9z' fill='%23fff'/%3E%3C/svg%3E");
+}
+
+.simplebar-scrollbar:before {
+    background: #fff;
+}
+
+.btn-top::after, .back__btn button::before, .btn-go-to-top::before, .btn-go-to-bottom::before, .articles__title, .border-left {
+    border-color: #fff;
+}
+
+.back__btn button {
+    color: #fff;
+}
+
+.articles__switch__theme__btn svg g path {
+    fill: #fff;
+}
+
+hr {
+    border: none;
+    color: white;
+    background-color: white;
+    height: 2px;
+}

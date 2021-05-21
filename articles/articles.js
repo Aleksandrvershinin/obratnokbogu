@@ -48,7 +48,9 @@ function articlesJs() {
                 scrolled = 0;
             }
             // прокручиваем страницу
-            window.scrollTo({ top: scrolled });
+            window.scrollTo({
+                top: scrolled
+            });
         }
     }
 
@@ -62,12 +64,16 @@ function articlesJs() {
 
     // функция получения scroll
     function trackScrollArticle() {
-        // получаем кнопку поделиться
-        let shareBtn = document.querySelector('.article_share');
+        // получаем кнопку переключения ночного режима
+        let changeModeBtn = document.querySelector('.articles__switch__theme__btn');
+
         let scrolled = window.pageYOffset;
+        // проверяем существует ли кнопка
+        if (changeModeBtn !== null) {
+            changeParamBtn(changeModeBtn, scrolled);
+        }
         setInfoLocalStorage(scrolled, nameArticle);
         changeParamBtn(back, scrolled);
-        changeParamBtn(shareBtn, scrolled);
     }
 
     // функция изменения положения кнопок
@@ -124,6 +130,7 @@ function articlesJs() {
     getElements();
     // функция добавления кнопки goToTop в статьях
     addGoToTop();
+
     // функция добавления кнопки вверх на странице выбора статьи
     startBtnGoToTop();
     // получаем элемент в который будем загружать страничку
@@ -157,6 +164,9 @@ function articlesJs() {
             startBtnGoToTop();
             // инцилизации скрипта поделиться
             initShare();
+
+            // инцилизации скрипта смены темы
+            switchTheme();
         } else {
 
         }
@@ -178,10 +188,14 @@ function articlesJs() {
     // фукция замены адресной строки
     function changeUrl(srcArticle, url, replace) {
         if (replace === "replace") {
-            history.replaceState({ 'path': srcArticle }, null, url);
+            history.replaceState({
+                'path': srcArticle
+            }, null, url);
 
         } else {
-            history.pushState({ 'path': srcArticle }, null, url);
+            history.pushState({
+                'path': srcArticle
+            }, null, url);
         }
     }
 
@@ -189,8 +203,9 @@ function articlesJs() {
     function addGoToTop() {
         let goTopBtn = document.getElementById('btn-top');
         // обработка события 'scroll'
-        window.addEventListener('scroll', trackScroll,
-            { passive: true });
+        window.addEventListener('scroll', trackScroll, {
+            passive: true
+        });
 
         if (goTopBtn !== null) {
             // обработка события 'click' для скролла
@@ -211,9 +226,14 @@ function articlesJs() {
                 }
             }
         }
+        // показываем кнопки
+        trackScroll();
         // функция скролла наверх
         function goToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
     }
 
